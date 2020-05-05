@@ -7,7 +7,7 @@
   <meta charset="utf-8">
   <meta http-equiv="X-UA-Compatible" content="IE=edge">
   <meta name="viewport" content="width=device-width, initial-scale=1">
-  <title> CEEO COAHUILA </title>
+  <title>Levantamiento de requerimientos Sinaloa </title>
 
   <link rel="shortcut icon" href="<?= base_url('assets/img/logotipo1.png') ?>">
   <link href="<?= base_url('assets/bootstrap337/css/bootstrap.min.css') ?>" rel="stylesheet" media="screen">

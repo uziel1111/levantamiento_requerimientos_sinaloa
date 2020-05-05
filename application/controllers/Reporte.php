@@ -24,18 +24,18 @@ class Reporte extends CI_Controller {
 			// Arial bold 16
 			$pdf->SetFont('Arial','B',14);
 			// Logo
-			$pdf->Image(base_url('assets/img/logotipo1.png'),10,8,15);
+			$pdf->Image(base_url('assets/img/logotipo1.png'),10,6,15);
 
 			// Movernos a la derecha, 85cm
 			$pdf->Cell(85);
 
 			$pdf->SetTextColor(0,0,0);
-			$pdf->Cell(20,10,utf8_decode('Secretaría de Educación del Estado de Coahuila'),0,1,'C');
+			$pdf->Cell(20,10,utf8_decode('Secretaría de Educación Pública y Cultura del Estado de Sinaloa'),0,1,'C');
 
 			// $pdf->Ln(1);
 			$pdf->Cell(85);
 			$pdf->SetFont('Arial','B',13);
-			$pdf->Cell(20,2,utf8_decode('Programa de Simplificación Administrativa (Ciclo Escolar: 2018-2019)'),0,1,'C');
+			$pdf->Cell(20,2,utf8_decode('Programa de Simplificación Administrativa (Ciclo Escolar: 2019-2020)'),0,1,'C');
 
 			$pdf->Cell(85);
 			$pdf->SetFont('Arial','B',13);
