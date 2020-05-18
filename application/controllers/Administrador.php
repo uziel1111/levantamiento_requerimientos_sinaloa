@@ -18,7 +18,7 @@ class Administrador extends CI_Controller {
     $id = $_POST['id'];
     $usuario = $this->Administrador_model->getUsuarios($id);
     foreach ($usuario as $key => $value) {
-      
+
       echo"<div class='accordion' id='accordionExample'>
             <div class='card'>
               <div class='card-header' id='headingOne'>
@@ -31,7 +31,7 @@ class Administrador extends CI_Controller {
 
               <div id='collapse".$value['idusuario']."' class='collapse' aria-labelledby='headingOne' data-parent='#accordionExample'>
                 <div id='archivos".$value['idusuario']."' class='card-body'>
-                  
+
                 </div>
               </div>
             </div>
@@ -61,8 +61,8 @@ class Administrador extends CI_Controller {
               <td scope='row'>".$value['idaplicar']."</td>
               <td>".$archivo."</td>
               <td>".$value['fcreacion']."</td>
-              <td> <button onclick='editar_ev(".$value['idaplicar'].")' type='button' class='btn btn-primary btn-block'> <i class='fa fa-edit'></i> Editar</button> 
-              <td> <button onclick='eliminar_ev(".$value['idaplicar'].",".$iduser.")' type='button' class='btn btn-primary btn-block'> <i class='fa fa-trash'></i> Eliminar</button> 
+              <td> <button onclick='editar_ev(".$value['idaplicar'].")' type='button' class='btn btn-primary btn-block'> <i class='fa fa-edit'></i> Editar</button>
+              <td> <button onclick='eliminar_ev(".$value['idaplicar'].",".$iduser.")' type='button' class='btn btn-primary btn-block'> <i class='fa fa-trash'></i> Eliminar</button>
               <td> <button onclick='mostrar_encuesta(".$value['idaplicar'].",".$iduser.")' type='button' class='btn btn-primary btn-block'>
                       <i class='fa fa-eye'></i> Mostrar
                    </button>
@@ -105,7 +105,7 @@ class Administrador extends CI_Controller {
       $usuario = $this->session->userdata[DATOSUSUARIO];
           // echo "<pre>"; print_r($usuario); die();
       switch ($usuario["idtipousuario"]) {
-          
+
         case U_ADMINISTRADOR:
         $tipo = "ADMINISTRADOR: ";
         break;

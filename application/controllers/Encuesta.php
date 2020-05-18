@@ -121,7 +121,7 @@ class Encuesta extends CI_Controller {
        case '1':
         $subsecretaria = 'Sub_Edu_Bas_'.$usuario['username'];
          break;
-        case '2':    
+        case '2':
         $subsecretaria = 'Sub_Adm_RRHH_'.$usuario['username'];
           break;
           case '3':
@@ -140,7 +140,7 @@ class Encuesta extends CI_Controller {
          if ($value == 'Otro <input type="text" name="otro_input">') {
              unset($array_respuestas['array_datos'][2]);
         }
-        
+
         if (is_int($key)) {
           if ($band==TRUE) {
             array_push($array_respuestas['array_datos'],array('tipo' => '1','idpregunta' => $key,'valores' => $value,'valores_string' => ''));
@@ -167,7 +167,7 @@ class Encuesta extends CI_Controller {
        // echo "<pre>";print_r($array_respuestas['array_datos']);
         //die();
      $i = strlen($_FILES['ifile_aplicar']['name']);
-              for ($j=$i; $j > 1 ; $j--) { 
+              for ($j=$i; $j > 1 ; $j--) {
                $extension = $_FILES['ifile_aplicar']['name'];
                $extension = substr($extension,$j);
                if (stristr($extension, '.')) {
@@ -190,9 +190,9 @@ class Encuesta extends CI_Controller {
         if ($nuevo_nombre_archivo!='') {
               $ruta_archivos = "evidencias/{$usuario['idusuario']}/{$id_aplica}/";
               // $ruta_archivos_save = "evidencias/{$usuario['idusuario']}/{$id_aplica}/$nombre_archivo";
-             
-            
-            
+
+
+
 
               if(!is_dir($ruta_archivos)){
                 mkdir($ruta_archivos, 0777, true);}
@@ -244,7 +244,7 @@ class Encuesta extends CI_Controller {
        case '1':
         $subsecretaria = 'Sub_Edu_Bas_'.$usuario['username'];
          break;
-        case '2':    
+        case '2':
         $subsecretaria = 'Sub_Adm_RRHH_'.$usuario['username'];
           break;
           case '3':
@@ -255,16 +255,16 @@ class Encuesta extends CI_Controller {
          break;
      }
       $array_respuestas = array('array_datos' => array());
-      
+
        foreach ($_POST as $key => $value) {
         if ($key == 4) {
-        
+
         array_push($array_respuestas['array_datos'],array('tipo' => '1','idpregunta' => $key,'valores' => $value,'valores_string' => ''));
         }
          if ($value == 'Otro <input type="text" name="otro_input">') {
              unset($array_respuestas['array_datos'][2]);
         }
-        
+
         if (is_int($key)) {
           if ($band==TRUE) {
             array_push($array_respuestas['array_datos'],array('tipo' => '1','idpregunta' => $key,'valores' => $value,'valores_string' => ''));
@@ -296,7 +296,7 @@ class Encuesta extends CI_Controller {
 
     $i = strlen($_FILES['ifile_aplicar']['name']);
     if ($i > 0) {
-       for ($j=$i; $j > 1 ; $j--) { 
+       for ($j=$i; $j > 1 ; $j--) {
                $extension = $_FILES['ifile_aplicar']['name'];
                $extension = substr($extension,$j);
                if (stristr($extension, '.')) {
@@ -313,9 +313,9 @@ class Encuesta extends CI_Controller {
        $nuevo_nombre_archivo = $_FILES['ifile_aplicar']['name'];
     }
 
-            
 
-             
+
+
 
       // $id_aplica = $this->Aplicar_model->insert_aplica($usuario['idusuario']);
       // $estatus_insert = $this->Respuestas_model->insert_respuestas($array_respuestas,$id_aplica,$ruta_archivos_save);
@@ -331,10 +331,10 @@ class Encuesta extends CI_Controller {
             }
               $ruta_archivos = "evidencias/{$usuario['idusuario']}/{$id_aplica}/";
 
-              
-            
-               
-                
+
+
+
+
               if(!is_dir($ruta_archivos)){
                 mkdir($ruta_archivos, 0777, true);}
                 // $_FILES['userFile']['name']     = $_FILES['ifile_aplicar']['name'];
@@ -388,15 +388,17 @@ class Encuesta extends CI_Controller {
       $array_preguntas = $this->Encuesta_model->get_cuestions_mostrar();
       $array_preguntas_ok = array();
       foreach ($array_preguntas as $key => $pregunta) {
+
         $pregunta['array_complemento'] = $this->Encuesta_model->get_complemento_xidpregunta_mostrar($pregunta['idpregunta']);
-        $pregunta['array_contesto'] = $this->Encuesta_model->get_encuestaxidusuario($idaplicar, $pregunta['idpregunta']);
+        $pregunta['array_contesto'] = $this->Encuesta_model->get_encuestaxidusuario1($idaplicar, $pregunta['idpregunta']);
         array_push($array_preguntas_ok, $pregunta);
       }
-      // echo "<pre>"; print_r( $pregunta['array_contesto']); die();
+      // echo "<pre>"; print_r( $array_preguntas_ok);die();
         $nombreUsuario = $pregunta['array_contesto'][0]['Usuario'];
       $array_final = array();
 
       foreach ($array_preguntas_ok as $key => $pregunta_ok) {
+        // echo "<pre>"; print_r($pregunta_ok);
         $array_final_aux['idpregunta'] = $pregunta_ok['idpregunta'];
         $array_final_aux['pregunta'] = $pregunta_ok['pregunta'];
         $array_final_aux['idtipopregunta'] = $pregunta_ok['idtipopregunta'];
@@ -411,10 +413,11 @@ class Encuesta extends CI_Controller {
           $array_final_aux['array_final'] = $this->verifica_sicontesto($pregunta_ok['array_complemento'], $pregunta_ok['array_contesto']);
         }elseif ($pregunta_ok['idtipopregunta'] == PREGUNTA_ABIERTA) {
           $array_final_aux['respuesta'] = (isset($pregunta_ok['array_contesto'][0]['respuesta']))?$pregunta_ok['array_contesto'][0]['respuesta']:'';
+          // echo "<pre>"; print_r($pregunta_ok['respuesta']);
         }
         array_push($array_final, $array_final_aux);
       }
-
+ // die();
       $array_observaciones = $this->Administrador_model->getObservaciones($idaplicar);
 
       $data['array_datos'] = $array_final;

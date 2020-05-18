@@ -87,6 +87,22 @@ WHERE res.idaplicar = {$idaplicar}";
     return $this->db->query($str_query)->result_array();
   }// get_encuestaxidusuario()
 
+  function get_encuestaxidusuario1($idaplicar, $idpregunta){
+    $str_query = " SELECT res.idrespuesta, res.respuesta, res.complemento, res.idpregunta,  CONCAT_WS(' ', u.nombre, u.paterno, u.materno) as Usuario
+     FROM respuesta res
+     INNER JOIN aplicar ap on ap.idaplicar = res.idaplicar
+     INNER JOIN usuario u on u.idusuario = ap.idusuario
+     WHERE res.idaplicar = {$idaplicar} AND res.idpregunta={$idpregunta}
+    ";
+//     $str_query = "SELECT res.idrespuesta, res.respuesta, res.complemento, res.idpregunta,  CONCAT_WS(' ', u.nombre, u.paterno, u.materno) as Usuario
+// FROM respuesta res
+// INNER JOIN aplicar ap on ap.idaplicar = res.idaplicar
+// INNER JOIN usuario u on u.idusuario = ap.idusuario
+// WHERE res.idaplicar = {$idaplicar}";
+    // echo $str_query; die();
+    return $this->db->query($str_query)->result_array();
+  }// get_encuestaxidusuario1()
+
   function get_file_path($idaplicar){
     $str_query = " SELECT res.url_comple
     FROM respuesta res
