@@ -90,7 +90,7 @@
 
      $("#iframe_cont").empty();
      // $("#iframe_cont").append(data.result);
-     $("#iframe_cont").prop("src", 'http://qual-edu.org/levantamiento_de_requerimientos/'+data.result);
+     $("#iframe_cont").prop("src", base_url+data.result);
      $("#n_formato").empty();
      $("#n_formato").html(data.nombre);
 
