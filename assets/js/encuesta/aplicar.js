@@ -157,6 +157,7 @@ $("#btn_encuesta_guardar").click(function(e){
   let Aplicar = {
 
     validar : () => {
+      
       $('.requerido').each(function(i, elem){
         // console.log(elem.type);
         switch (elem.type) {
@@ -228,6 +229,12 @@ $("#btn_encuesta_guardar").click(function(e){
                 }
 
             break;
+          }
+          if($("input[type='textarea']")){
+            i++;
+            if($("#textarea"+i).data('tamanio') != undefined && $("#textarea"+i).val().length > $("#textarea"+i).data('tamanio')){
+              $("#span"+i).html("El texto no puede ser mayor a "+$("#textarea"+i).data('tamanio')+" carateres");
+            }
           }
         });
 
