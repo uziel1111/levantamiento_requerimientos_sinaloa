@@ -13,7 +13,7 @@
 
       <form id='form_cuestionario_doc' enctype="multipart/form-data">
 
-      <?php $array_idpreguntas = array(); ?>
+      <?php $array_idpreguntas = array();  $i = 0;?>
 
       <?php foreach ($array_preguntas as $key => $pregunta) { array_push($array_idpreguntas, $pregunta['idpregunta'].'/'.$pregunta['idtipopregunta'] ); ?>
         <div class="row margintop10">
@@ -21,13 +21,15 @@
               <label><?= $pregunta['npregunta'] ?>.- <?= $pregunta['pregunta'] ?></label> <i class="fa fa-info-circle" data-toggle="tooltip" data-placement="top" title="<?= $pregunta['instructivo'] ?>"></i>
             </div>
             <?php if($pregunta['idtipopregunta'] == PREGUNTA_ABIERTA){ ?>
-              <?php if ($pregunta['npregunta']==17 || $pregunta['npregunta']==10){?>
+              <?php if ($pregunta['npregunta']==17 || $pregunta['npregunta']==10){ $i++;?>
                 <div class='col-xs-12'>
-                  <textarea data-idpregunta="<?= $pregunta['idpregunta'] ?>" class='form-control textarea_blur' rows='2' name="<?= $pregunta['idpregunta'] ?>" style="height: 120px;"></textarea>
+                  <textarea data-idpregunta="<?= $pregunta['idpregunta'] ?>" class='form-control textarea_blur' rows='2' name="<?= $pregunta['idpregunta'] ?>" style="height: 120px;"  data-tamanio ="<?= $pregunta['tamanio_campo']?>"  maxlength="<?= $pregunta['tamanio_campo']?>" id="textarea<?=$i?>"></textarea>
+                  <span style="color:red" id="span<?=$i?>"></span>
                 </div>
-              <?php } else {?>
+              <?php } else { $i++;?>
               <div class='col-xs-12'>
-                <textarea data-idpregunta="<?= $pregunta['idpregunta'] ?>" class='form-control requerido textarea_blur' rows='2' name="<?= $pregunta['idpregunta'] ?>" style="height: 120px;"></textarea>
+                <textarea data-idpregunta="<?= $pregunta['idpregunta'] ?>" class='form-control requerido textarea_blur' rows='2' name="<?= $pregunta['idpregunta'] ?>" style="height: 120px;"  data-tamanio ="<?= $pregunta['tamanio_campo']?>"  maxlength="<?= $pregunta['tamanio_campo']?>" id="textarea<?=$i?>"></textarea>
+                <span style="color:red" id="span<?=$i?>"></span>
               </div>
             <?php } } ?>
             <?php if($pregunta['idtipopregunta'] == PREGUNTA_OPCIONMULTIPLE){ ?>
