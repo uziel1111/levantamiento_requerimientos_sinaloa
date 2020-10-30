@@ -60,6 +60,22 @@
               <?php } ?>
             <?php } ?>
 
+            <?php if($pregunta['idtipopregunta'] == PREGUNTA_UNAOPCION_SLC){ ?>
+                <div class='col-xs-12'>
+                  <?php if($key==0)  { ?>
+                  <input type="hidden" id="itxt_aplicar_idpregunta_<?= $pregunta['idpregunta'] ?>" name="itxt_aplicar_idpregunta_<?= $pregunta['idpregunta'] ?>" value="">
+                <?php } ?>
+                <select class="requerido" data-idpregunta="<?= $pregunta['idpregunta'] ?>" name="<?= $pregunta['idpregunta'] ?>">
+                  <option value="0">Seleccione una opción</option>
+                  <?php foreach ($pregunta['array_complemento'] as $key => $complemento) { ?>
+                  <option value="<?= $complemento['complemento'] ?>"><?= $complemento['complemento'] ?></option>
+                  <?php } ?>
+                </select>
+                <label id="label_<?= $pregunta['idpregunta'] ?>" class="error"></label>
+                </div>
+              <?php } ?>
+
+
         </div><!-- .row -->
         <br>
       <?php } ?>

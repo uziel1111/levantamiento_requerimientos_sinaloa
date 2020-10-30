@@ -158,11 +158,15 @@ $("#btn_encuesta_guardar").click(function(e){
 
     validar : () => {
       $('.requerido').each(function(i, elem){
+        // console.log(elem.type);
         switch (elem.type) {
           case "textarea":
             $(elem).css({'border':'1px solid rgb(169, 169, 169)'});
           break;
           case "checkbox":
+            $('#label_'+elem.name).html('');
+          break;
+          case "select-one":
             $('#label_'+elem.name).html('');
           break;
         }
@@ -204,6 +208,20 @@ $("#btn_encuesta_guardar").click(function(e){
                   array_preguntas.push(idpregunta);
                   // console.log("else includes");
                   if(!$("input[name="+elem.name+"]:checked").val()) {
+                      $('#label_'+elem.name).html('seleccione <br />');
+                      error++;
+                  }
+                }
+
+            break;
+            case "select-one":
+              // let idpregunta = $(elem).data('idpregunta');
+
+                if(array_preguntas.includes(idpregunta)){
+                  // console.log("if includes");
+                }else{
+                  array_preguntas.push(idpregunta);
+                  if($(elem).val() =="0") {
                       $('#label_'+elem.name).html('seleccione <br />');
                       error++;
                   }
@@ -252,6 +270,17 @@ $("#btn_encuesta_guardar").click(function(e){
           }
 
           if((array_ids_ok[i]['tipo'] == 3) || (array_ids_ok[i]['tipo'] == '3')){ // sólo checkbox
+            let string_ok = '';
+            for (var j = 0; j < valores.length; j++) {
+              let valor = valores[j]['valor'];
+              string_ok = string_ok+valor+'/';
+            }
+            string_ok = string_ok.substring(0, string_ok.length - 1);
+            array_ids_ok[i]['valores_string'] = string_ok;
+            $("#itxt_aplicar_idpregunta_"+array_ids_ok[i]['idpregunta']).val(string_ok);
+          }
+
+          if((array_ids_ok[i]['tipo'] == 4) || (array_ids_ok[i]['tipo'] == '4')){ // sólo select
             let string_ok = '';
             for (var j = 0; j < valores.length; j++) {
               let valor = valores[j]['valor'];
@@ -335,7 +364,7 @@ $("#btn_encuesta_guardar").click(function(e){
         }
       })
       .done(function(data) {
-        
+
         $("#wait").modal("hide");
         if (data.estatus) {
           bootbox.alert(data.respuesta, function(){

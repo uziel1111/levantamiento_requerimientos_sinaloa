@@ -9,7 +9,7 @@ class Respuestas_model extends CI_Model {
     function insert_respuestas($respuestas, $nombre_archivo, $idusuario){
       $fecha = date("Y-m-d H:i:s");
       $band= FALSE;
-      // echo "<pre>";print_r($respuestas['array_datos']);die();
+      echo "<pre>";print_r($respuestas['array_datos']);die();
       $this->db->trans_start();
       $data = array(
         'idusuario' => $idusuario,

@@ -57,8 +57,9 @@ class Encuesta extends CI_Controller {
       }
 
       // echo "despues";
-      // echo "<pre>"; print_r($array_preguntas_ok); die();
+
       $data['array_preguntas'] = $array_preguntas_ok;
+      // echo "<pre>"; print_r($data); die();
       pagina_basica($this, "encuesta/aplicar", $data);
     }// verifica_sesion_redirige()
   }// aplicar()
@@ -132,8 +133,9 @@ class Encuesta extends CI_Controller {
          break;
      }
       $array_respuestas = array('array_datos' => array());
+      echo "<pre>";print_r($_POST);die();
       foreach ($_POST as $key => $value) {
-        if ($key == 4) {
+        if ($key == 6) {
         // echo "<pre>";print_r($value);
         array_push($array_respuestas['array_datos'],array('tipo' => '1','idpregunta' => $key,'valores' => $value,'valores_string' => ''));
         }
