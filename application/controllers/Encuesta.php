@@ -133,7 +133,7 @@ class Encuesta extends CI_Controller {
          break;
      }
       $array_respuestas = array('array_datos' => array());
-      echo "<pre>";print_r($_POST);die();
+      // echo "<pre>";print_r($_POST);die();
       foreach ($_POST as $key => $value) {
         if ($key == 6) {
         // echo "<pre>";print_r($value);
@@ -158,7 +158,8 @@ class Encuesta extends CI_Controller {
              array_push($array_respuestas['array_datos'],array('tipo' => '2','idpregunta' => 3,'valores_string' => $value));
             }
             array_push($array_respuestas['array_datos'],array('tipo' => '2','idpregunta' => end($arr_cand),'valores_string' => $value));
-           unset($array_respuestas['array_datos'][4]);
+           unset($array_respuestas['array_datos'][5]);
+           unset($array_respuestas['array_datos'][8]);
             $band=FALSE;
           }
           else {
