@@ -14,8 +14,10 @@
       <form id='form_cuestionario_doc' enctype="multipart/form-data">
 
       <?php $array_idpreguntas = array();  $i = 0;?>
+      <?php //echo'<pre>'; print_r($_SESSION['datos_usuario_ceeo']['idusuario']); die();  ?>
 
       <?php foreach ($array_preguntas as $key => $pregunta) { array_push($array_idpreguntas, $pregunta['idpregunta'].'/'.$pregunta['idtipopregunta'] ); ?>
+        <?php if($pregunta['idtipousuario'] == $_SESSION['datos_usuario_ceeo']['idusuario']){ ?>
         <div class="row margintop10">
             <div class='col-xs-12'>
               <label><?= $pregunta['npregunta'] ?>.- <?= $pregunta['pregunta'] ?></label> <i class="fa fa-info-circle" data-toggle="tooltip" data-placement="top" title="<?= $pregunta['instructivo'] ?>"></i>
@@ -70,7 +72,7 @@
                 <select class="requerido" data-idpregunta="<?= $pregunta['idpregunta'] ?>" name="<?= $pregunta['idpregunta'] ?>">
                   <option value="0">Seleccione una opción</option>
                   <?php foreach ($pregunta['array_complemento'] as $key => $complemento) { ?>
-                  <option value="<?= $complemento['complemento'] ?>"><?= $complemento['complemento'] ?></option>
+                  <option value="<?= $complemento['orden'] ?>"><?= $complemento['complemento'] ?></option>
                   <?php } ?>
                 </select>
                 <label id="label_<?= $pregunta['idpregunta'] ?>" class="error"></label>
@@ -80,6 +82,7 @@
 
         </div><!-- .row -->
         <br>
+        <?php } ?>
       <?php } ?>
 
       <?php $separado_por_comas1 = implode(",", $array_idpreguntas); ?>

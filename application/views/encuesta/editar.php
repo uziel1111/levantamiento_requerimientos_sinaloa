@@ -15,6 +15,7 @@
       <?php $array_idpreguntas = array(); ?>
 
       <?php foreach ($array_preguntas as $key => $pregunta) { array_push($array_idpreguntas, $pregunta['idpregunta'].'/'.$pregunta['idtipopregunta'] ); ?>
+        <?php if($pregunta['idtipousuario'] == $_SESSION['datos_usuario_ceeo']['idusuario'] || $_SESSION['datos_usuario_ceeo']['idusuario'] == 1 ){ ?>
         <div class="row margintop10">
             <div class='col-xs-12'>
               <label><?= $pregunta['npregunta'] ?>.- <?= $pregunta['pregunta'] ?></label> <i class="fa fa-info-circle" data-toggle="tooltip" data-placement="top" title="<?= $pregunta['instructivo'] ?>"></i>
@@ -81,6 +82,7 @@
 
         </div><!-- .row -->
         <br>
+        <?php } ?>
       <?php } ?>
 
       <?php $separado_por_comas1 = implode(",", $array_idpreguntas); ?>
