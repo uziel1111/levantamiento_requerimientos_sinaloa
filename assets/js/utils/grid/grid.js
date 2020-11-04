@@ -49,7 +49,7 @@ function Grid(iddiv,columnas,arr_datos){
             switch (objeto_columnas[item]["type"]) {
               case "button":
                   html += "<td id='"+item+"' data='"+that_grid.arr_datos[i][item]+"'>";
-                  html += "<button id='btn_mostrar_encuesta' onclick='ver_ev("+that_grid.arr_datos[i][item]+")' type='button' class='btn btn-primary btn-block'> <i class='fa fa-eye'></i>";
+                  html += "<button id='btn_mostrar_encuesta' onclick='Encuesta.ver_ev("+that_grid.arr_datos[i][item]+")' type='button' class='btn btn-primary btn-block'> <i class='fa fa-eye'></i>";
                   html += "</button>";
                   html += "</td>";
                 break;

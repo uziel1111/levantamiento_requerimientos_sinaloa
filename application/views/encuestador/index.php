@@ -68,42 +68,4 @@
     </div>
   </div>
 </div>
-
-
-
-<script type="text/javascript">
- function ver_ev(id_aplica){
-
-   var ruta = base_url+"Encuesta/get_arch_evidencia";
-   $.ajax({
-     async: true,
-     url: ruta,
-     method: 'POST',
-     data: {"id_aplica":id_aplica},
-     beforeSend: function( xhr ) {
-       $("#wait").modal("show");
-     }
-   })
-   .done(function( data ) {
-     // console.log(data);
-     $("#wait").modal("hide");
-
-     $("#iframe_cont").empty();
-     // $("#iframe_cont").append(data.result);
-     $("#iframe_cont").prop("src", base_url+data.result);
-     $("#n_formato").empty();
-     $("#n_formato").html(data.nombre);
-
-
-      $("#exampleModal_ver_evidencia").modal("show");
-
-   })
-   .fail(function(jqXHR, textStatus, errorThrown) {
-     // console.error("Error in read()"); console.table(e);
-     $("#wait").modal("hide"); Helpers.error_ajax(jqXHR, textStatus, errorThrown);
-   });
-
-  };
-</script>
-
 <script src="<?= base_url('assets/js/encuestador/encuestador.js') ?>"></script>

@@ -151,28 +151,37 @@ let Encuesta = {
     form.action = base_url+"encuesta/edith/"+idaplicar;
     document.body.appendChild(form);
     form.submit();
+  },
 
-    // var ruta = base_url+"Encuesta/editar";
-    // $.ajax({
-    //   async: true,
-    //   url: ruta,
-    //   method: 'POST',
-    //   data: {"id_aplicar":$row_g[0]['id']},
-    //   beforeSend: function( xhr ) {
-    //     $("#wait").modal("show");
-    //   }
-    // })
-    // .done(function( data ) {
-    //   $("#wait").modal("hide");
-    //   // location.href = base_url+"Encuesta/editar";
-    //   $(".container").empty();
-    //   $(".container").append(data.str_view_edit);
-    //
-    // })
-    // .fail(function(jqXHR, textStatus, errorThrown) {
-    //   // console.error("Error in read()"); console.table(e);
-    //   $("#wait").modal("hide"); Helpers.error_ajax(jqXHR, textStatus, errorThrown);
-    // });
+  ver_ev : (id_aplica) =>{
+    var ruta = base_url+"Encuesta/get_arch_evidencia";
+    $.ajax({
+      async: true,
+      url: ruta,
+      method: 'POST',
+      data: {"id_aplica":id_aplica},
+      beforeSend: function( xhr ) {
+        $("#wait").modal("show");
+      }
+    })
+    .done(function( data ) {
+      // console.log(data);
+      $("#wait").modal("hide");
+  
+      $("#iframe_cont").empty();
+      // $("#iframe_cont").append(data.result);
+      $("#iframe_cont").prop("src", base_url+data.result);
+      $("#n_formato").empty();
+      $("#n_formato").html(data.nombre);
+  
+  
+       $("#exampleModal_ver_evidencia").modal("show");
+  
+    })
+    .fail(function(jqXHR, textStatus, errorThrown) {
+      // console.error("Error in read()"); console.table(e);
+      $("#wait").modal("hide"); Helpers.error_ajax(jqXHR, textStatus, errorThrown);
+    });
   }
 
 };
@@ -193,3 +202,5 @@ else {
 
 
 });
+
+
