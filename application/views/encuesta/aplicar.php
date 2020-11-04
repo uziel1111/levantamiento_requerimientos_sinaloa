@@ -114,32 +114,4 @@
 
 </div><!-- container -->
 
-<script type="text/javascript">
-  $(document).ready(function () {
-    let str = $("#itxt_idpreguntas").val();
-    array_ids = str.split(",");
-    array_ids_ok = [];
-
-    for (var i = 0; i < array_ids.length; i++) {
-      let array_aux = new Object();
-      let todo = array_ids[i];
-      let arr_todo = todo.split("/");
-      let idpregunta = arr_todo[0];
-      let tipo = arr_todo[1];
-      array_aux["tipo"] = tipo;
-      array_aux["idpregunta"] = idpregunta;
-      array_aux["valores"] = [];
-      array_aux["valores_string"] = '';
-      array_ids_ok.push(array_aux);
-    }
-
-
-    let array_aux_file = new Object();
-    array_aux_file["tipo"] = 'archivo';
-    array_aux_file["archivo"] = '';
-    array_ids_ok.push(array_aux_file);
-
-  });
-</script>
-
 <script src="<?= base_url('assets/js/encuesta/aplicar.js') ?>"></script>
