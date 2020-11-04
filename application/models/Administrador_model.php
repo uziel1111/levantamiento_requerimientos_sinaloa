@@ -44,8 +44,6 @@ class Administrador_model extends CI_Model
 	}
 
 	public function guardarNotas($accion, $especificacion, $justificacion, $notas, $encuestado, $encuestadoOtro, $tema, $sostenimiento, $idaplicar) {	
-			
-
           $data = array(
             'accionMejora' => $accion,
             'especificarMejora' => $especificacion,

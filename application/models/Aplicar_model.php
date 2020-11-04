@@ -13,7 +13,6 @@ class Aplicar_model extends CI_Model {
                       FROM aplicar ap
                       WHERE ap.idusuario = {$idvisitador}
           ";
-          // echo $str_query; die();
        return $this->db->query($str_query)->result_array();
      }// get_visitadas()
 
@@ -23,7 +22,6 @@ class Aplicar_model extends CI_Model {
                       FROM aplicar ap
                       WHERE ap.idusuario = {$idvisitador}
           ";
-          // echo $str_query; die();
        return $this->db->query($str_query)->result_array();
      }// get_visitadas()
 
@@ -37,25 +35,9 @@ class Aplicar_model extends CI_Model {
                       FROM aplicar ap
                       WHERE ap.idcct = {$idcct} AND  ap.idusuario = {$idvisitador}
           ";
-          // echo $str_query; die();
        return $this->db->query($str_query)->result_array();
      }// get_visitadas()
-
-     // function insert_aplica($idusuario, $idcct, $atendio){
-     //
-     //  $fecha = date("Y-m-d H:i:s");
-     //  $data = array(
-     //    'idusuario' => $idusuario,
-     //    'idcct' => $idcct,
-     //    'fcreacion' => $fecha,
-     //    'atendio' => $atendio
-     //  );
-     //
-     //  $this->db->insert('aplicar', $data);
-     //  $id = $this->db->insert_id();
-     //  return $id;
-     // }
-
+     
      function insert_aplica($idusuario){
       $fecha = date("Y-m-d H:i:s");
       $data = array(

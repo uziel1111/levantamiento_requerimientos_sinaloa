@@ -9,7 +9,6 @@ class Respuestas_model extends CI_Model {
     function insert_respuestas($respuestas, $nombre_archivo, $idusuario){
       $fecha = date("Y-m-d H:i:s");
       $band= FALSE;
-      // echo "<pre>";print_r($respuestas['array_datos']);die();
       $this->db->trans_start();
       $data = array(
         'idusuario' => $idusuario,
@@ -18,7 +17,6 @@ class Respuestas_model extends CI_Model {
       $this->db->insert('aplicar', $data);
       $id_aplica = $this->db->insert_id();
 
-      // echo "<pre>";print_r($id_aplica);die();
       if ($id_aplica > 0) {
         if ($nombre_archivo!='') {
           $ruta_archivos_save = "evidencias/{$idusuario}/{$id_aplica}/$nombre_archivo";

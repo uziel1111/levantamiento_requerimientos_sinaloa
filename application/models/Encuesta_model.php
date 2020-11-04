@@ -8,10 +8,6 @@ class Encuesta_model extends CI_Model {
 
 
   function get_xidusuario($idvisitador){
-    // $str_query = " SELECT ap.idaplicar AS id, fcreacion
-    // FROM aplicar ap
-    // WHERE ap.idusuario = {$idvisitador}
-    // ";
     $str_query = " SELECT
       ap.idaplicar AS id, fcreacion,
       r.respuesta as n_documento,
@@ -21,8 +17,6 @@ class Encuesta_model extends CI_Model {
       WHERE ap.idusuario = {$idvisitador} AND r.idpregunta=1
       ORDER BY fcreacion DESC
     ";
-
-    // echo $str_query; die();
     return $this->db->query($str_query)->result_array();
   }// get_asignadas()
 
@@ -44,7 +38,6 @@ class Encuesta_model extends CI_Model {
     FROM pregunta_complemento
     WHERE idpregunta = {$idpregunta}
     ORDER BY orden ASC ";
-    // echo "<pre>";print_r($query);die();
     return $this->db->query($query)->result_array();
   }
 
@@ -53,7 +46,6 @@ class Encuesta_model extends CI_Model {
     $query = " SELECT * FROM pregunta p
     INNER JOIN respuesta r ON r.idpregunta = p.idpregunta
     WHERE r.idaplicar = {$idaplicar} and p.idencuesta = {$tipo}";
-    // echo $query; die();
     return $this->db->query($query)->result_array();
   }// get_cuestions_edita()
 
@@ -74,16 +66,11 @@ class Encuesta_model extends CI_Model {
   }
 
   function get_encuestaxidusuario($idaplicar, $idpregunta){
-    // $str_query = " SELECT res.idrespuesta, res.respuesta, res.complemento, res.idpregunta
-    // FROM respuesta res
-    // WHERE res.idaplicar = ? AND res.idpregunta = ?
-    // ";
     $str_query = "SELECT res.idrespuesta, res.respuesta, res.complemento, res.idpregunta,  CONCAT_WS(' ', u.nombre, u.paterno, u.materno) as Usuario
-FROM respuesta res
-INNER JOIN aplicar ap on ap.idaplicar = res.idaplicar
-INNER JOIN usuario u on u.idusuario = ap.idusuario
-WHERE res.idaplicar = {$idaplicar}";
-    // echo $str_query; die();
+    FROM respuesta res
+    INNER JOIN aplicar ap on ap.idaplicar = res.idaplicar
+    INNER JOIN usuario u on u.idusuario = ap.idusuario
+    WHERE res.idaplicar = {$idaplicar}";
     return $this->db->query($str_query)->result_array();
   }// get_encuestaxidusuario()
 
@@ -94,12 +81,6 @@ WHERE res.idaplicar = {$idaplicar}";
      INNER JOIN usuario u on u.idusuario = ap.idusuario
      WHERE res.idaplicar = {$idaplicar} AND res.idpregunta={$idpregunta}
     ";
-//     $str_query = "SELECT res.idrespuesta, res.respuesta, res.complemento, res.idpregunta,  CONCAT_WS(' ', u.nombre, u.paterno, u.materno) as Usuario
-// FROM respuesta res
-// INNER JOIN aplicar ap on ap.idaplicar = res.idaplicar
-// INNER JOIN usuario u on u.idusuario = ap.idusuario
-// WHERE res.idaplicar = {$idaplicar}";
-    // echo $str_query; die();
     return $this->db->query($str_query)->result_array();
   }// get_encuestaxidusuario1()
 
@@ -108,7 +89,6 @@ WHERE res.idaplicar = {$idaplicar}";
     FROM respuesta res
     WHERE res.idaplicar = ? AND res.idpregunta IS NULL
     ";
-    // echo $str_query; die();
     return $this->db->query($str_query, array($idaplicar))->result_array();
   }// get_file_path()
 
@@ -143,7 +123,6 @@ WHERE res.idaplicar = {$idaplicar}";
     FROM respuesta res
     WHERE res.idaplicar = {$idaplicar} AND res.idpregunta IS NULL
     ";
-    // echo $str_query; die();
     return $this->db->query($str_query)->row('url_comple');
   }// get_url_evidencia()
 
@@ -153,7 +132,6 @@ function get_nombre_evidencia($idaplicar){
   FROM respuesta res
   WHERE res.idaplicar = {$idaplicar} AND res.idpregunta = 1
   ";
-  // echo $str_query; die();
   return $this->db->query($str_query)->row('respuesta');
 }// get_nombre_evidencia()
 
