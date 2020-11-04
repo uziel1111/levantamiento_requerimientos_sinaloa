@@ -155,7 +155,7 @@ class Encuesta extends CI_Controller {
           if ($band==TRUE) {
             $arr_cand =explode('_', $key);
             if ($key=='otro_input') {
-             array_push($array_respuestas['array_datos'],array('tipo' => '2','idpregunta' => 3,'valores_string' => $value));
+             array_push($array_respuestas['array_datos'],array('tipo' => '2','idpregunta' => 6,'valores_string' => $value));
             }
             array_push($array_respuestas['array_datos'],array('tipo' => '2','idpregunta' => end($arr_cand),'valores_string' => $value));
            unset($array_respuestas['array_datos'][5]);
@@ -167,8 +167,8 @@ class Encuesta extends CI_Controller {
           }
         }
       }
-       // echo "<pre>";print_r($array_respuestas['array_datos']);
-        //die();
+      //  echo "<pre>";print_r($array_respuestas);
+        // die();
      $i = strlen($_FILES['ifile_aplicar']['name']);
               for ($j=$i; $j > 1 ; $j--) {
                $extension = $_FILES['ifile_aplicar']['name'];

@@ -14,7 +14,7 @@ class Encuesta_model extends CI_Model {
       r.idaplicar as a_adjunto
       FROM aplicar ap
       LEFT JOIN respuesta r ON ap.idaplicar=r.idaplicar
-      WHERE ap.idusuario = {$idvisitador} AND r.idpregunta=1
+      WHERE ap.idusuario = {$idvisitador} AND r.idpregunta=4
       ORDER BY fcreacion DESC
     ";
     return $this->db->query($str_query)->result_array();
