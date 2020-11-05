@@ -19,6 +19,9 @@
 					<?php if ($value['idsubsecretaria'] == 4 ): ?>
 						<div class="accordion bg-danger" id="accordionExample4">
 					<?php endif ?>
+					<?php if ($value['idsubsecretaria'] == 5 ): ?>
+						<div class="accordion bg-warning" id="accordionExample5">
+					<?php endif ?>
 						<div class="card">
 							<div class="card-header" id="headingOne">
 								<h5 class="mb-0">

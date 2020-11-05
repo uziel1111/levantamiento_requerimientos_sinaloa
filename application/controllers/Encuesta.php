@@ -120,13 +120,19 @@ class Encuesta extends CI_Controller {
       $usuario = $this->session->userdata[DATOSUSUARIO];
        switch ($usuario['idsubsecretaria']) {
        case '1':
-        $subsecretaria = 'Sub_Edu_Bas_'.$usuario['username'];
+        $subsecretaria = 'multi_areas_'.$usuario['username'];
          break;
         case '2':
-        $subsecretaria = 'Sub_Adm_RRHH_'.$usuario['username'];
+        $subsecretaria = 'of_titular_'.$usuario['username'];
           break;
           case '3':
-        $subsecretaria = 'Sub_Pla_Edu_'.$usuario['username'];
+        $subsecretaria = 'direc_gen_serv_admin_'.$usuario['username'];
+            break;
+          case '4':
+        $subsecretaria = 'subse_edu_basic_'.$usuario['username'];
+            break;
+          case '5':
+        $subsecretaria = 'subse_plan_educ_'.$usuario['username'];
             break;
        default:
          $subsecretaria = 'otra_subsecreatria_'.$usuario['username'];
@@ -232,13 +238,19 @@ class Encuesta extends CI_Controller {
       // echo "<pre>"; print_r($_POST); die();
      switch ($usuario['idsubsecretaria']) {
        case '1':
-        $subsecretaria = 'Sub_Edu_Bas_'.$usuario['username'];
+        $subsecretaria = 'multi_areas_'.$usuario['username'];
          break;
         case '2':
-        $subsecretaria = 'Sub_Adm_RRHH_'.$usuario['username'];
+        $subsecretaria = 'of_titular_'.$usuario['username'];
           break;
           case '3':
-        $subsecretaria = 'Sub_Pla_Edu_'.$usuario['username'];
+        $subsecretaria = 'direc_gen_serv_admin_'.$usuario['username'];
+            break;
+          case '4':
+        $subsecretaria = 'subse_edu_basic_'.$usuario['username'];
+            break;
+          case '5':
+        $subsecretaria = 'subse_plan_educ_'.$usuario['username'];
             break;
        default:
          $subsecretaria = 'otra_subsecreatria_'.$usuario['username'];
@@ -269,7 +281,7 @@ class Encuesta extends CI_Controller {
       }
         $aux_cont++;
       }
-  
+
     //    foreach ($_POST as $key => $value) {
     //     if ($key == 4) {
 
