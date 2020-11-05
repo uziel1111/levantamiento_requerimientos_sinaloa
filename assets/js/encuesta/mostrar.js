@@ -4,7 +4,7 @@
          if (encuestado == 6) {
         $('#encuestadoOtro').removeClass('ocultar');
         }else{
-         $('#encuestadoOtro').addClass('ocultar'); 
+         $('#encuestadoOtro').addClass('ocultar');
         }
 
       });

@@ -437,7 +437,9 @@ class Encuesta extends CI_Controller {
           // $array_opciones = $pregunta_ok['array_complemento'];
           $array_final_aux['array_final'] = $this->verifica_sicontesto($pregunta_ok['array_complemento'], $pregunta_ok['array_contesto']);
         }elseif ($pregunta_ok['idtipopregunta'] == PREGUNTA_UNAOPCION) {
+
           $array_final_aux['array_final'] = $this->verifica_sicontesto($pregunta_ok['array_complemento'], $pregunta_ok['array_contesto']);
+          // echo "<pre>"; print_r($array_final_aux['array_final']);
         }elseif ($pregunta_ok['idtipopregunta'] == PREGUNTA_ABIERTA) {
           $array_final_aux['respuesta'] = (isset($pregunta_ok['array_contesto'][0]['respuesta']))?$pregunta_ok['array_contesto'][0]['respuesta']:'';
           // echo "<pre>"; print_r($pregunta_ok['respuesta']);
@@ -454,7 +456,8 @@ class Encuesta extends CI_Controller {
       $data['nombreUsuario'] = $nombreUsuario;
       $data['idaplicar'] = $idaplicar;
       $data['array_observaciones'] = $array_observaciones;
-      // echo "<pre>"; print_r($data); die();
+      // echo "<pre>"; print_r($data);
+      // die();
       pagina_basica($this, "encuesta/mostrar", $data);
     }// verifica_sesion_redirige()
   }// mostrar()
@@ -473,12 +476,18 @@ class Encuesta extends CI_Controller {
       $array_aux['complemento'] = $opcion_catalogo['complemento'];
       $array_aux['orden'] = $opcion_catalogo['orden'];
       $array_aux['checked'] = '';
-
+// echo "<pre>";print_r($opcion_catalogo['complemento']);die();
       if (in_array($opcion_catalogo['complemento'], $array_complementos_contesto)) {
           $array_aux['checked'] = 'checked';
+
+          if ($opcion_catalogo['complemento']=='Otro <input type="text" name="otro_input">') {
+            $array_aux['input_otro'] = $array_complementos_contesto[1];
+            // echo "<pre>";print_r($array_aux);die();
+          }
       }
       array_push($array_final, $array_aux);
     }
+    // echo "<pre>";print_r($array_final);die();
     return $array_final;
   }// verifica_sicontesto()
 

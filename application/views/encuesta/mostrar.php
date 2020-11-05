@@ -38,7 +38,8 @@
             <?php foreach ($dato['array_final'] as $key => $opcion) { ?>
               <div class='col-xs-12'>
                 <label class='checkbox-inline'>
-                  <input  <?=($dato['npregunta']!=26) ? 'disabled':''?> class='requerido' type='radio' <?= ( (isset($opcion['checked'])) && (strlen($opcion['checked'])>0) )?'checked':'' ?> > <?= $opcion['complemento'] ?>
+                  <input  <?=($dato['npregunta']!=26) ? 'disabled':''?> class='requerido' type='radio' <?= ( (isset($opcion['checked'])) && (strlen($opcion['checked'])>0) )?'checked':'' ?> >
+                  <?=($opcion['complemento']=='Otro <input type="text" name="otro_input">')? 'Otro <input type="text" name="otro_input" value="'.$opcion['input_otro'].'">':$opcion['complemento']?>
                 </label>
               </div>
             <?php } ?>
@@ -75,7 +76,7 @@
 
                 <a href="<?= base_url($file_path) ?>" target="_blank"><img src="<?= base_url($file_path) ?>" class="img-responsive"></a>
 
-              </div><!-- .col-lg-8 -->           
+              </div><!-- .col-lg-8 -->
             <?php } ?>
             <?php if ($tipoUsuario == 'ADMINISTRADOR') { ?>
               <?php foreach ($array_observaciones as $key => $adminDatos){ ?>
@@ -84,7 +85,7 @@
                 <div class="col-xs-7 col-sm-7 col-md-7 col-lg-7">
                   <div class="col-xs-12 col-sm-12 col-md-12 col-lg-12">
                     <input type="number" id="idaplicar" value="<?=$idaplicar;?>" style="display: none;">
-         
+
                     <div class='col-xs-12 col-sm-12 col-md-6 col-lg-6'>
                       <label>¿Quién llena el requerimiento?</label>
                       <br>
@@ -106,12 +107,12 @@
                             <option name="encuestado" value="3" <?= ($adminDatos['responsableDocumento'] == 3) ? 'selected' :'' ?>>El padre de familia</option>
                             <option name="encuestado" value="4" <?= ($adminDatos['responsableDocumento'] == 4) ? 'selected' :'' ?>>El supervisor</option>
                             <option name="encuestado" value="5" <?= ($adminDatos['responsableDocumento'] == 5) ? 'selected' :'' ?>>Personal de la Secretría</option>
-                            <option name="encuestado" value="6" <?= ($adminDatos['responsableDocumento'] == 6) ? 'selected' :'' ?>>Otro</option> 
+                            <option name="encuestado" value="6" <?= ($adminDatos['responsableDocumento'] == 6) ? 'selected' :'' ?>>Otro</option>
                             <input type="text" id="encuestadoOtro" class="ocultar" value="<?=$adminDatos['otroResponsable']?>">
                         </select>
                       <?php } ?>
                     </div>
-                  
+
                     <div class='col-xs-12 col-sm-12 col-md-12 col-lg-12'>
                       <br>
                     <label>Especificar Acción</label>
@@ -126,7 +127,7 @@
                       <a id="guardarNotas" class="btn btn-info btn-block">Guardar</a>
                     </div>
                   </div>
-                </div> 
+                </div>
                 <!-- sección nueva de administrador -->
               <?php } ?>
             <?php } ?>
