@@ -84,6 +84,15 @@ class Encuesta_model extends CI_Model {
     return $this->db->query($str_query)->result_array();
   }// get_encuestaxidusuario1()
 
+  function respuestas_slc($idaplicar)
+  {
+    $str_query = "SELECT r.respuesta, pc.complemento FROM respuesta r
+    inner join pregunta_complemento pc on pc.orden = r.respuesta AND pc.idpregunta = r.idpregunta
+    where r.idpregunta in (1,2,3) and r.idaplicar =  {$idaplicar}";
+
+    return $this->db->query($str_query)->result_array();
+  } //respuestas_slc()
+
   function get_file_path($idaplicar){
     $str_query = " SELECT res.url_comple
     FROM respuesta res

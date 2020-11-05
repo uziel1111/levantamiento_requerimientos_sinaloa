@@ -383,8 +383,8 @@ class Encuesta extends CI_Controller {
         $pregunta['array_contesto'] = $this->Encuesta_model->get_encuestaxidusuario1($idaplicar, $pregunta['idpregunta']);
         array_push($array_preguntas_ok, $pregunta);
       }
-      // echo "<pre>"; print_r( $array_preguntas_ok);die();
-        $nombreUsuario = $pregunta['array_contesto'][0]['Usuario'];
+      // echo "<pre>"; print_r( $pregunta['array_contesto']);die();
+        $nombreUsuario = ($pregunta['array_contesto'] != NULL) ? $pregunta['array_contesto'][0]['Usuario'] : '';
       $array_final = array();
 
       foreach ($array_preguntas_ok as $key => $pregunta_ok) {
@@ -395,6 +395,7 @@ class Encuesta extends CI_Controller {
         $array_final_aux['npregunta'] = $pregunta_ok['npregunta'];
         $array_final_aux['instructivo'] = $pregunta_ok['instructivo'];
         $array_final_aux['respuesta'] = $pregunta_ok['respuesta'];
+        $array_final_aux['idtipousuario'] = $pregunta_ok['idtipousuario'];
 
         if($pregunta_ok['idtipopregunta'] == PREGUNTA_OPCIONMULTIPLE){
           // $array_opciones = $pregunta_ok['array_complemento'];
@@ -407,9 +408,10 @@ class Encuesta extends CI_Controller {
         }
         array_push($array_final, $array_final_aux);
       }
+      $respuesta_slc = $this->Encuesta_model->respuestas_slc($idaplicar);
  // die();
       $array_observaciones = $this->Administrador_model->getObservaciones($idaplicar);
-
+      $data['respuesta_slc'] = $respuesta_slc;
       $data['array_datos'] = $array_final;
       $array_file = $this->Encuesta_model->get_file_path($idaplicar);
       $data['file_path'] = (count($array_file)>0)?$array_file[0]['url_comple']:'';

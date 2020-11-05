@@ -79,6 +79,23 @@
                 </div>
               <?php } ?>
             <?php } ?>
+            <?php if($pregunta['idtipopregunta'] == PREGUNTA_UNAOPCION_SLC){ ?>
+                <div class='col-xs-12'>
+                <select class="requerido" data-idpregunta="<?= $pregunta['idpregunta'] ?>" name="<?= $pregunta['idpregunta'] ?>">
+                  <option value="0">Seleccione una opción</option>
+                  <?php foreach ($pregunta['array_complemento'] as $key => $complemento) { 
+                     if ($array_respuetas[$key]['respuesta'] == ($complemento['orden']-1)) {
+                      $selected = 'selected';
+                    } else {
+                      $selected = '';
+                    }
+                    ?>
+                  <option value="<?= $complemento['orden'] ?>" <?= $selected ?> ><?= $complemento['complemento'] ?></option>
+                  <?php } ?>
+                </select>
+                <label id="label_<?= $pregunta['idpregunta'] ?>" class="error"></label>
+                </div>
+              <?php } ?>
 
         </div><!-- .row -->
         <br>

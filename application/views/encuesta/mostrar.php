@@ -6,18 +6,19 @@
 <div class="container">
   <div class="panel panel-default">
     <div class="panel-heading bg-color-1 text-center">
-      <h3 class="panel-title">Mostrar requerimiento / <?=$nombreUsuario?></h3>
+      <h3 class="panel-title">Mostrar requerimiento <?= ($tipoUsuario == 'ADMINISTRADOR') ? '/ '. $nombreUsuario : ''?></h3>
     </div><!-- .panel-heading -->
     <div class="panel-body">
 
-      <?php foreach ($array_datos as $key => $dato) {?>
+      <?php $aux=0;  foreach ($array_datos as $key => $dato) {?>
+        <?php if($dato['idtipousuario'] == $_SESSION['datos_usuario_ceeo']['idusuario'] || $_SESSION['datos_usuario_ceeo']['idusuario'] == U_ADMINISTRADOR ){ ?>
         <div class="row margintop10">
           <div class='col-xs-12'>
             <label><?= $dato['npregunta'] ?>.- <?= $dato['pregunta'] ?></label> <i class="fa fa-info-circle" data-toggle="tooltip" data-placement="top" title="<?= $dato['instructivo'] ?>"></i>
           </div>
           <?php if($dato['idtipopregunta'] == PREGUNTA_ABIERTA){ ?>
             <div class='col-xs-12'>
-              <textarea class='form-control' style="height: 120px;" rows='2' readonly><?= (isset($dato['respuesta']))?$dato['respuesta']:'' ?></textarea>
+              <textarea class='form-control' style="height: 120px;" rows='2' <?=($dato['npregunta']!=27) ? 'readonly':''?>><?= (isset($dato['respuesta']))?$dato['respuesta']:'' ?></textarea>
             </div><!-- .col-xs-12 -->
           <?php } ?>
           <?php if($dato['idtipopregunta'] == PREGUNTA_OPCIONMULTIPLE){ ?>
@@ -37,16 +38,25 @@
             <?php foreach ($dato['array_final'] as $key => $opcion) { ?>
               <div class='col-xs-12'>
                 <label class='checkbox-inline'>
-                  <input disabled class='requerido' type='radio' <?= ( (isset($opcion['checked'])) && (strlen($opcion['checked'])>0) )?'checked':'' ?> > <?= $opcion['complemento'] ?>
+                  <input  <?=($dato['npregunta']!=26) ? 'disabled':''?> class='requerido' type='radio' <?= ( (isset($opcion['checked'])) && (strlen($opcion['checked'])>0) )?'checked':'' ?> > <?= $opcion['complemento'] ?>
                 </label>
               </div>
             <?php } ?>
             <!--  -->
           <?php } ?>
+          <?php if($dato['idtipopregunta'] == PREGUNTA_UNAOPCION_SLC){?>
+                <div class='col-xs-12'>
+                <select class="requerido" data-idpregunta="<?= $dato['idpregunta'] ?>" name="<?= $dato['idpregunta'] ?>" disabled>
+                  <option value="<?= $respuesta_slc[$aux]['respuesta'] ?>" selected><?= $respuesta_slc[$aux]['complemento']?></option>
+                </select>
+                <label id="label_<?= $dato['idpregunta'] ?>" class="error"></label>
+                </div>
+              <?php $aux++; } ?>
 
         </div><!-- .row -->
         <br>
-      <?php } ?>
+          <?php }
+    } ?>
 
       <div class="row margintop10">
         <?php
@@ -91,64 +101,13 @@
                         </select>
                       <?php } else { ?>
                         <select id="encuestadoSelect"  class="selectpicker">
-                          <?php switch ($adminDatos['responsableDocumento']) {
-                            case '1': ?>
-                            <option name="encuestado" value="1" selected>El interesado</option>
-                            <option name="encuestado" value="2">El director(a)</option>
-                            <option name="encuestado" value="3">El padre de familia</option>
-                            <option name="encuestado" value="4">El supervisor</option>
-                            <option name="encuestado" value="5">Personal de la Secretría</option>
-                            <option name="encuestado" value="6">Otro</option> 
+                            <option name="encuestado" value="1" <?= ($adminDatos['responsableDocumento'] == 1) ? 'selected' :'' ?>>El interesado</option>
+                            <option name="encuestado" value="2" <?= ($adminDatos['responsableDocumento'] == 2) ? 'selected' :'' ?>>El director(a)</option>
+                            <option name="encuestado" value="3" <?= ($adminDatos['responsableDocumento'] == 3) ? 'selected' :'' ?>>El padre de familia</option>
+                            <option name="encuestado" value="4" <?= ($adminDatos['responsableDocumento'] == 4) ? 'selected' :'' ?>>El supervisor</option>
+                            <option name="encuestado" value="5" <?= ($adminDatos['responsableDocumento'] == 5) ? 'selected' :'' ?>>Personal de la Secretría</option>
+                            <option name="encuestado" value="6" <?= ($adminDatos['responsableDocumento'] == 6) ? 'selected' :'' ?>>Otro</option> 
                             <input type="text" id="encuestadoOtro" class="ocultar" value="<?=$adminDatos['otroResponsable']?>">
-                            <?php break;
-                            case '2': ?>
-                            <option name="encuestado" value="1">El interesado</option>
-                            <option name="encuestado" value="2" selected>El director(a)</option>
-                            <option name="encuestado" value="3">El padre de familia</option>
-                            <option name="encuestado" value="4">El supervisor</option>
-                            <option name="encuestado" value="5">Personal de la Secretría</option>
-                            <option name="encuestado" value="6">Otro</option>
-                            <input type="text" id="encuestadoOtro" class="ocultar" value="<?=$adminDatos['otroResponsable']?>">
-                            <?php break;
-                            case '3': ?>
-                            <option name="encuestado" value="1">El interesado</option>
-                            <option name="encuestado" value="2">El director(a)</option>
-                            <option name="encuestado" value="3" selected>El padre de familia</option>
-                            <option name="encuestado" value="4">El supervisor</option>
-                            <option name="encuestado" value="5">Personal de la Secretría</option>
-                            <option name="encuestado" value="6">Otro</option>
-                            <input type="text" id="encuestadoOtro" class="ocultar" value="<?=$adminDatos['otroResponsable']?>">
-                            
-                            <?php break;
-                            case '4': ?>
-                            <option name="encuestado" value="1">El interesado</option>
-                            <option name="encuestado" value="2">El director(a)</option>
-                            <option name="encuestado" value="3">El padre de familia</option>
-                            <option name="encuestado" value="4" selected>El supervisor</option>
-                            <option name="encuestado" value="5">Personal de la Secretría</option>
-                            <option name="encuestado" value="6">Otro</option>
-                            <input type="text" id="encuestadoOtro" class="ocultar" value="<?=$adminDatos['otroResponsable']?>">
-                            <?php break;
-                            case '5': ?>
-                            <option name="encuestado" value="1">El interesado</option>
-                            <option name="encuestado" value="2">El director(a)</option>
-                            <option name="encuestado" value="3">El padre de familia</option>
-                            <option name="encuestado" value="4">El supervisor</option>
-                            <option name="encuestado" value="5" selected>Personal de la Secretría</option>
-                            <option name="encuestado" value="6">Otro</option>
-                            <input type="text" id="encuestadoOtro" class="ocultar" value="<?=$adminDatos['otroResponsable']?>">
-                            <?php break;
-                            case '6': ?>
-                            <option name="encuestado" value="1">El interesado</option>
-                            <option name="encuestado" value="2">El director(a)</option>
-                            <option name="encuestado" value="3">El padre de familia</option>
-                            <option name="encuestado" value="4">El supervisor</option>
-                            <option name="encuestado" value="5">Personal de la Secretría</option>
-                            <option name="encuestado" value="6" selected>Otro</option>
-                            <input type="text" id="encuestadoOtro" value="<?=$adminDatos['otroResponsable']?>">
-                            <?php break;
-
-                          } ?>
                         </select>
                       <?php } ?>
                     </div>
