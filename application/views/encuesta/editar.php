@@ -15,7 +15,8 @@
       <?php $array_idpreguntas = array(); ?>
 
       <?php foreach ($array_preguntas as $key => $pregunta) { array_push($array_idpreguntas, $pregunta['idpregunta'].'/'.$pregunta['idtipopregunta'] ); ?>
-        <?php if($pregunta['idtipousuario'] == $_SESSION['datos_usuario_ceeo']['idusuario'] || $_SESSION['datos_usuario_ceeo']['idusuario'] == U_ADMINISTRADOR ){ ?>
+        <?php if($pregunta['idtipousuario'] == $_SESSION['datos_usuario_ceeo']['idtipousuario'] || $_SESSION['datos_usuario_ceeo']['idtipousuario'] == U_ADMINISTRADOR ){ ?>
+        <input type="hidden" id="tipo_usuario" value = "<?= $_SESSION['datos_usuario_ceeo']['idtipousuario'] ?>">
         <div class="row margintop10">
             <div class='col-xs-12'>
               <label><?= $pregunta['npregunta'] ?>.- <?= $pregunta['pregunta'] ?></label> <i class="fa fa-info-circle" data-toggle="tooltip" data-placement="top" title="<?= $pregunta['instructivo'] ?>"></i>

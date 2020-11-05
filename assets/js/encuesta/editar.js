@@ -318,13 +318,17 @@ $("#btn_encuesta_editar").click(function(e){
           }
 
           if((array_ids_ok[i]['tipo'] == 3) || (array_ids_ok[i]['tipo'] == '3')){ // sólo checkbox
-           if( array_ids_ok[i]['idpregunta'] != '26')
-            {let string_ok = '';
-              let valor = valores[0]['valor'];
+                let string_ok = '';   
+                let valor = '';
+           if( array_ids_ok[i]['idpregunta'] == '26' && $("#tipo_usuario").val()==2){ 
+            valor = '';
+           } else {
+            valor = valores[0]['valor'];
+           }
               string_ok = string_ok+valor+'/';
             string_ok = string_ok.substring(0, string_ok.length - 1);
             array_ids_ok[i]['valores_string'] = string_ok;
-            $("#itxt_aplicar_idpregunta_"+array_ids_ok[i]['idpregunta']).val(string_ok);}
+            $("#itxt_aplicar_idpregunta_"+array_ids_ok[i]['idpregunta']).val(string_ok);
           }
 
           /*

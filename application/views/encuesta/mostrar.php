@@ -11,7 +11,7 @@
     <div class="panel-body">
 
       <?php $aux=0;  foreach ($array_datos as $key => $dato) {?>
-        <?php if($dato['idtipousuario'] == $_SESSION['datos_usuario_ceeo']['idusuario'] || $_SESSION['datos_usuario_ceeo']['idusuario'] == U_ADMINISTRADOR ){ ?>
+        <?php if($dato['idtipousuario'] == $_SESSION['datos_usuario_ceeo']['idtipousuario'] || $_SESSION['datos_usuario_ceeo']['idtipousuario'] == U_ADMINISTRADOR ){ ?>
         <div class="row margintop10">
           <div class='col-xs-12'>
             <label><?= $dato['npregunta'] ?>.- <?= $dato['pregunta'] ?></label> <i class="fa fa-info-circle" data-toggle="tooltip" data-placement="top" title="<?= $dato['instructivo'] ?>"></i>
@@ -78,11 +78,12 @@
 
               </div><!-- .col-lg-8 -->
             <?php } ?>
-            <?php if ($tipoUsuario == 'ADMINISTRADOR') { ?>
-              <?php foreach ($array_observaciones as $key => $adminDatos){ ?>
+            <!-- se comenta por que no sabemos si se van a utilizar o no -->
+            <?php // if ($tipoUsuario == 'ADMINISTRADOR') { ?>
+              <?php //foreach ($array_observaciones as $key => $adminDatos){ ?>
 
                 <!-- sección nueva de administrador -->
-                <div class="col-xs-7 col-sm-7 col-md-7 col-lg-7">
+                <!-- <div class="col-xs-7 col-sm-7 col-md-7 col-lg-7">
                   <div class="col-xs-12 col-sm-12 col-md-12 col-lg-12">
                     <input type="number" id="idaplicar" value="<?=$idaplicar;?>" style="display: none;">
 
@@ -127,10 +128,10 @@
                       <a id="guardarNotas" class="btn btn-info btn-block">Guardar</a>
                     </div>
                   </div>
-                </div>
+                </div> -->
                 <!-- sección nueva de administrador -->
-              <?php } ?>
-            <?php } ?>
+              <!-- <?php // } ?> 
+            <?php //} ?> -->
             <div class='col-xs-12 col-sm-12 col-md-4 col-lg-4'></div>
           </div><!-- .row -->
 
