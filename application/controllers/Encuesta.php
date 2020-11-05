@@ -245,44 +245,68 @@ class Encuesta extends CI_Controller {
          break;
      }
       $array_respuestas = array('array_datos' => array());
-
-       foreach ($_POST as $key => $value) {
-        if ($key == 4) {
-
-        array_push($array_respuestas['array_datos'],array('tipo' => '1','idpregunta' => $key,'valores' => $value,'valores_string' => ''));
-        }
-         if ($value == 'Otro <input type="text" name="otro_input">') {
-             unset($array_respuestas['array_datos'][2]);
-        }
-
+      $aux_cont = 0;
+      foreach ($_POST as $key => $value) {
         if (is_int($key)) {
-          if ($band==TRUE) {
+          if (array_search($key, array_column($array_respuestas['array_datos'], 'idpregunta'))==FALSE) {
             array_push($array_respuestas['array_datos'],array('tipo' => '1','idpregunta' => $key,'valores' => $value,'valores_string' => ''));
-          }
-          else {
-            $band=TRUE;
           }
         }
         else {
-          if ($key=='id_aplicar') {
-            $id_aplica =$value;
+          $arr_cand =explode('_', $key);
+          if ($key != 'aplicar') {
+            $id_aplica = $_POST['id_aplicar'];
+          } else {
+          if ($key == 'otro_input') {
+           array_push($array_respuestas['array_datos'],array('tipo' => '2','idpregunta' => 6,'valores_string' => $value));
           }
           else {
-            if ($band==TRUE) {
-              $arr_cand =explode('_', $key);
-             if ($key=='otro_input') {
-             array_push($array_respuestas['array_datos'],array('tipo' => '2','idpregunta' => 3,'valores_string' => $value));
+            if (array_search(end($arr_cand), array_column($array_respuestas['array_datos'], 'idpregunta'))==FALSE) {
+              array_push($array_respuestas['array_datos'],array('tipo' => '2','idpregunta' => end($arr_cand),'valores_string' => $value));
             }
-            array_push($array_respuestas['array_datos'],array('tipo' => '2','idpregunta' => end($arr_cand),'valores_string' => $value));
-           unset($array_respuestas['array_datos'][4]);
-            $band=FALSE;
-          }
-          else {
-            $band=TRUE;
           }
         }
       }
-    }
+        $aux_cont++;
+      }
+  
+    //    foreach ($_POST as $key => $value) {
+    //     if ($key == 4) {
+
+    //     array_push($array_respuestas['array_datos'],array('tipo' => '1','idpregunta' => $key,'valores' => $value,'valores_string' => ''));
+    //     }
+    //      if ($value == 'Otro <input type="text" name="otro_input">') {
+    //          unset($array_respuestas['array_datos'][2]);
+    //     }
+
+    //     if (is_int($key)) {
+    //       if ($band==TRUE) {
+    //         array_push($array_respuestas['array_datos'],array('tipo' => '1','idpregunta' => $key,'valores' => $value,'valores_string' => ''));
+    //       }
+    //       else {
+    //         $band=TRUE;
+    //       }
+    //     }
+    //     else {
+    //       if ($key=='id_aplicar') {
+    //         $id_aplica =$value;
+    //       }
+    //       else {
+    //         if ($band==TRUE) {
+    //           $arr_cand =explode('_', $key);
+    //          if ($key=='otro_input') {
+    //          array_push($array_respuestas['array_datos'],array('tipo' => '2','idpregunta' => 3,'valores_string' => $value));
+    //         }
+    //         array_push($array_respuestas['array_datos'],array('tipo' => '2','idpregunta' => end($arr_cand),'valores_string' => $value));
+    //        unset($array_respuestas['array_datos'][4]);
+    //         $band=FALSE;
+    //       }
+    //       else {
+    //         $band=TRUE;
+    //       }
+    //     }
+    //   }
+    // }
 
     $i = strlen($_FILES['ifile_aplicar']['name']);
     if ($i > 0) {
