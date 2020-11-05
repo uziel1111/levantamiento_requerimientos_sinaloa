@@ -14,7 +14,7 @@
       <?php //echo'<pre>'; print_r($_SESSION['datos_usuario_ceeo']['idusuario']); die();  ?>
 
       <?php foreach ($array_preguntas as $key => $pregunta) { array_push($array_idpreguntas, $pregunta['idpregunta'].'/'.$pregunta['idtipopregunta'] ); ?>
-        <?php if($pregunta['idtipousuario'] == $_SESSION['datos_usuario_ceeo']['idusuario']){ ?>
+        <?php if($pregunta['idtipousuario'] == $_SESSION['datos_usuario_ceeo']['idtipousuario']){ ?>
         <div class="row margintop10">
             <div class='col-xs-12'>
               <label><?= $pregunta['npregunta'] ?>.- <?= $pregunta['pregunta'] ?></label> <i class="fa fa-info-circle" data-toggle="tooltip" data-placement="top" title="<?= $pregunta['instructivo'] ?>"></i>
