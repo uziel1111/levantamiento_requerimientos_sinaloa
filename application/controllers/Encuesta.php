@@ -422,7 +422,7 @@ class Encuesta extends CI_Controller {
       // echo "<pre>"; print_r( $pregunta['array_contesto']);die();
         $nombreUsuario = ($pregunta['array_contesto'] != NULL) ? $pregunta['array_contesto'][0]['Usuario'] : '';
       $array_final = array();
-
+// echo "<pre>"; print_r($array_preguntas_ok);die();
       foreach ($array_preguntas_ok as $key => $pregunta_ok) {
         // echo "<pre>"; print_r($pregunta_ok);
         $array_final_aux['idpregunta'] = $pregunta_ok['idpregunta'];
