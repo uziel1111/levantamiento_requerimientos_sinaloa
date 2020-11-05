@@ -35,7 +35,7 @@ class Reporte extends CI_Controller {
 			// $pdf->Ln(1);
 			$pdf->Cell(85);
 			$pdf->SetFont('Arial','B',13);
-			$pdf->Cell(20,2,utf8_decode('Programa de Simplificación Administrativa (Ciclo Escolar: 2019-2020)'),0,1,'C');
+			$pdf->Cell(20,2,utf8_decode('Programa de Simplificación Administrativa (Ciclo Escolar: 2020-2021)'),0,1,'C');
 
 			$pdf->Cell(85);
 			$pdf->SetFont('Arial','B',13);

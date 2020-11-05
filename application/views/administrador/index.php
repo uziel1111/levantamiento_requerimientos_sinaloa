@@ -1,33 +1,36 @@
 <div class="container-fluid">
 	<div class="row">
 		<div class="col-xs-12">
-			<center><h2>Sistema de seguimiento CEEO</h2></center>
+			<center><h2>Levantamiento de requerimientos Sinaloa</h2></center>
 
 			<div id="tabla_usuario">
 				<?php foreach ($subsecretaria as $key => $value) { ?>
 
 					<!-- Acordeón -->
 					<?php if ($value['idsubsecretaria'] == 1 ): ?>
-						<div class="accordion bg-success" id="accordionExample">
+						<div class="accordion bg-success" id="accordionExample1">
 					<?php endif ?>
 					<?php if ($value['idsubsecretaria'] == 2 ): ?>
-						<div class="accordion bg-warning" id="accordionExample">
+						<div class="accordion bg-warning" id="accordionExample2">
 					<?php endif ?>
 					<?php if ($value['idsubsecretaria'] == 3 ): ?>
-						<div class="accordion bg-info" id="accordionExample">
+						<div class="accordion bg-info" id="accordionExample3">
+					<?php endif ?>
+					<?php if ($value['idsubsecretaria'] == 4 ): ?>
+						<div class="accordion bg-danger" id="accordionExample4">
 					<?php endif ?>
 						<div class="card">
 							<div class="card-header" id="headingOne">
 								<h5 class="mb-0">
 									<button class="btn btn-link" onclick="traerUsuarios(<?=  $value['idsubsecretaria']?>)" type="button" data-toggle="collapse" data-target="#collapse<?= $value['idsubsecretaria']?>" aria-expanded="true" aria-controls="collapse<?= $value['idsubsecretaria']?>">
-											<p><?= $value['subsecretaria']?></p>										
+											<p><?= $value['subsecretaria']?></p>
 									</button>
 								</h5>
 							</div>
 
-							<div id="collapse<?= $value['idsubsecretaria']?>" class="collapse" aria-labelledby="headingOne" data-parent="#accordionExample">
+							<div id="collapse<?= $value['idsubsecretaria']?>" class="collapse" aria-labelledby="headingOne" data-parent="#accordionExample<?= $value['idsubsecretaria']?>">
 								<div id="card<?=$value['idsubsecretaria']?>" class="card-body">
-									
+
 								</div>
 							</div>
 						</div>
