@@ -268,7 +268,7 @@ class Encuesta extends CI_Controller {
           $arr_cand =explode('_', $key);
           if ($key != 'aplicar') {
             $id_aplica = $_POST['id_aplicar'];
-          } else {
+          }
           if ($key == 'otro_input') {
            array_push($array_respuestas['array_datos'],array('tipo' => '2','idpregunta' => 6,'valores_string' => $value));
           }
@@ -278,10 +278,10 @@ class Encuesta extends CI_Controller {
             }
           }
         }
-      }
+        unset($array_respuestas['array_datos'][0]);
         $aux_cont++;
       }
-
+  // echo '<pre>'; print_r($array_respuestas); die();
     //    foreach ($_POST as $key => $value) {
     //     if ($key == 4) {
 
