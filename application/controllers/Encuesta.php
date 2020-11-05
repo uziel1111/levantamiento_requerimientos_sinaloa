@@ -134,41 +134,28 @@ class Encuesta extends CI_Controller {
      }
       $array_respuestas = array('array_datos' => array());
       // echo "<pre>";print_r($_POST);die();
+      $aux_cont=0;
       foreach ($_POST as $key => $value) {
-        if ($key == 6) {
-        // echo "<pre>";print_r($value);
-        array_push($array_respuestas['array_datos'],array('tipo' => '1','idpregunta' => $key,'valores' => $value,'valores_string' => ''));
-        }
-         if ($value == 'Otro <input type="text" name="otro_input">') {
-             unset($array_respuestas['array_datos'][2]);
-        }
-
         if (is_int($key)) {
-          if ($band==TRUE) {
+          if (array_search($key, array_column($array_respuestas['array_datos'], 'idpregunta'))==FALSE) {
             array_push($array_respuestas['array_datos'],array('tipo' => '1','idpregunta' => $key,'valores' => $value,'valores_string' => ''));
-          }
-          else {
-            $band=TRUE;
           }
         }
         else {
-          if ($band==TRUE) {
-            $arr_cand =explode('_', $key);
-            if ($key=='otro_input') {
-             array_push($array_respuestas['array_datos'],array('tipo' => '2','idpregunta' => 6,'valores_string' => $value));
-            }
-            array_push($array_respuestas['array_datos'],array('tipo' => '2','idpregunta' => end($arr_cand),'valores_string' => $value));
-           unset($array_respuestas['array_datos'][5]);
-           unset($array_respuestas['array_datos'][8]);
-            $band=FALSE;
+          $arr_cand =explode('_', $key);
+          if ($key == 'otro_input') {
+           array_push($array_respuestas['array_datos'],array('tipo' => '2','idpregunta' => 6,'valores_string' => $value));
           }
           else {
-            $band=TRUE;
+            if (array_search(end($arr_cand), array_column($array_respuestas['array_datos'], 'idpregunta'))==FALSE) {
+              array_push($array_respuestas['array_datos'],array('tipo' => '2','idpregunta' => end($arr_cand),'valores_string' => $value));
+            }
           }
         }
+        $aux_cont++;
       }
-      //  echo "<pre>";print_r($array_respuestas);
-        // die();
+       // echo "<pre>";print_r($array_respuestas);
+       //  die();
      $i = strlen($_FILES['ifile_aplicar']['name']);
               for ($j=$i; $j > 1 ; $j--) {
                $extension = $_FILES['ifile_aplicar']['name'];

@@ -1,6 +1,3 @@
-<!-- PREGUNTA_ABIERTA -->
-<!-- PREGUNTA_OPCIONMULTIPLE -->
-
 <div class="container">
   <div class="panel panel-default">
     <div class="panel-heading bg-color-1 text-center">
@@ -67,7 +64,7 @@
             <?php if($pregunta['idtipopregunta'] == PREGUNTA_UNAOPCION_SLC){ ?>
                 <div class='col-xs-12'>
                   <?php if($key==0)  { ?>
-                  <input type="hidden" id="itxt_aplicar_idpregunta_<?= $pregunta['idpregunta'] ?>" name="itxt_aplicar_idpregunta_<?= $pregunta['idpregunta'] ?>" value="">
+                  <!-- <input type="hidden" id="itxt_aplicar_idpregunta_<?= $pregunta['idpregunta'] ?>" name="itxt_aplicar_idpregunta_<?= $pregunta['idpregunta'] ?>" value=""> -->
                 <?php } ?>
                 <select class="requerido" data-idpregunta="<?= $pregunta['idpregunta'] ?>" name="<?= $pregunta['idpregunta'] ?>">
                   <option value="0">Seleccione una opción</option>
