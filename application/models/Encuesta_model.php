@@ -11,7 +11,8 @@ class Encuesta_model extends CI_Model {
     $str_query = " SELECT
       ap.idaplicar AS id, fcreacion,
       r.respuesta as n_documento,
-      r.idaplicar as a_adjunto
+      r.idaplicar as a_adjunto,
+      IF(ap.estatus = 1, 'Activo','Inactivo') as estatus
       FROM aplicar ap
       LEFT JOIN respuesta r ON ap.idaplicar=r.idaplicar
       WHERE ap.idusuario = {$idvisitador} AND r.idpregunta=4

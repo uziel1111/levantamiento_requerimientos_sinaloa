@@ -18,7 +18,7 @@
           </div>
           <?php if($dato['idtipopregunta'] == PREGUNTA_ABIERTA){ ?>
             <div class='col-xs-12'>
-              <textarea class='form-control' style="height: 120px;" rows='2' <?=($dato['npregunta']!=27) ? 'readonly':''?>><?= (isset($dato['respuesta']))?$dato['respuesta']:'' ?></textarea>
+              <textarea class='form-control' style="height: 120px;" rows='2' readonly><?= (isset($dato['respuesta']))?$dato['respuesta']:'' ?></textarea>
             </div><!-- .col-xs-12 -->
           <?php } ?>
           <?php if($dato['idtipopregunta'] == PREGUNTA_OPCIONMULTIPLE){ ?>
@@ -38,7 +38,7 @@
             <?php foreach ($dato['array_final'] as $key => $opcion) { ?>
               <div class='col-xs-12'>
                 <label class='checkbox-inline'>
-                  <input  <?=($dato['npregunta']!=26) ? 'disabled':''?> class='requerido' type='radio' <?= ( (isset($opcion['checked'])) && (strlen($opcion['checked'])>0) )?'checked':'' ?> >
+                  <input disabled class='requerido' type='radio' <?= ( (isset($opcion['checked'])) && (strlen($opcion['checked'])>0) )?'checked':'' ?> >
                   <?=($opcion['complemento']=='Otro <input type="text" name="otro_input">')? 'Otro <input type="text" name="otro_input" value="'.$opcion['input_otro'].'">':$opcion['complemento']?>
                 </label>
               </div>

@@ -84,16 +84,16 @@ class Reporte extends CI_Controller {
 
 			foreach($result_aplicar as $item){
 				$idaplicar =  $item['idaplicar'];
-				$result3 = $this->Reporte_model->get_respuestas($idaplicar, 3);
+				$result3 = $this->Reporte_model->get_respuestas($idaplicar, 6);
 				$respuestas_3 = $result3[0]['respuestas_seleccionadas'];
 
-				$result8 = $this->Reporte_model->get_respuestas($idaplicar, 8);
+				$result8 = $this->Reporte_model->get_respuestas($idaplicar, 11);
 				$respuestas_8 = $result8[0]['respuestas_seleccionadas'];
 
-				$result9 = $this->Reporte_model->get_respuestas($idaplicar, 9);
+				$result9 = $this->Reporte_model->get_respuestas($idaplicar, 13);
 				$respuestas_9 = $result9[0]['respuestas_seleccionadas'];
 
-				$result12 = $this->Reporte_model->get_respuestas($idaplicar, 12);
+				$result12 = $this->Reporte_model->get_respuestas($idaplicar, 16);
 				$respuestas_12 = $result12[0]['respuestas_seleccionadas'];
 
 				$cont++;

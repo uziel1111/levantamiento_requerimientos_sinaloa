@@ -23,7 +23,8 @@ class Encuesta extends CI_Controller {
       $arr_columnas = array(
         "id"=>array("type"=>"text", "width"=>"5", "header"=>"Folio"),
         "fcreacion"=>array("type"=>"hidden", "width"=>"0", "header"=>"Fecha de aplicación"),
-        "n_documento"=>array("type"=>"text", "width"=>"85", "header"=>"Nombre del documento"),
+        "n_documento"=>array("type"=>"text", "width"=>"75", "header"=>"Nombre del documento"),
+        'estatus'=>array("type"=>"text", "width"=>"10", "header"=>"Estatus documento"),
         "a_adjunto"=>array("type"=>"button", "width"=>"10", "header"=>"Evidencia")
       );
 
