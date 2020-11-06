@@ -27,13 +27,13 @@ class Reporte_model extends CI_Model {
                   (
                   SELECT respuesta, complemento
                   FROM respuesta
-                  WHERE idaplicar = ? AND idpregunta=?  AND complemento <> 'Otro <input type="text" name="otro_input">'
+                  WHERE idaplicar = ? AND idpregunta=?  AND complemento <> ?
                   GROUP BY complemento
                   ) AS tabla1
     ";
 
     // echo $str_query; die();
-    return $this->db->query($str_query, array($idaplicar,$idpregunta))->result_array();
+    return $this->db->query($str_query, array($idaplicar,$idpregunta,'Otro <input type="text" name="otro_input">'))->result_array();
   }// get_xidusuario()
 
 
