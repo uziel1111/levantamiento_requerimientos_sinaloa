@@ -27,7 +27,7 @@ class Reporte_model extends CI_Model {
                   (
                   SELECT respuesta, complemento
                   FROM respuesta
-                  WHERE idaplicar = ? AND idpregunta=?
+                  WHERE idaplicar = ? AND idpregunta=?  AND complemento <> 'Otro <input type="text" name="otro_input">'
                   GROUP BY complemento
                   ) AS tabla1
     ";
