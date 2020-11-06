@@ -1,3 +1,24 @@
+<style>  
+.fondo1 {
+    background:#ffc8e3;
+}
+
+.fondo2 {
+    background:#bfffbf;
+}
+
+.fondo3 {
+    background:#c4ffff;
+}
+
+.fondo4 {
+    background:#d7d7ff;
+}
+
+.fondo5 {
+    background:#fcfdc1;
+}
+</style>
 <div class="container-fluid">
 	<div class="row">
 		<div class="col-xs-12">
@@ -7,37 +28,19 @@
 				<?php foreach ($subsecretaria as $key => $value) { ?>
 
 					<!-- Acordeón -->
-					<?php if ($value['idsubsecretaria'] == 1 ): ?>
-						<div class="accordion bg-success" id="accordionExample1">
-					<?php endif ?>
-					<?php if ($value['idsubsecretaria'] == 2 ): ?>
-						<div class="accordion bg-warning" id="accordionExample2">
-					<?php endif ?>
-					<?php if ($value['idsubsecretaria'] == 3 ): ?>
-						<div class="accordion bg-info" id="accordionExample3">
-					<?php endif ?>
-					<?php if ($value['idsubsecretaria'] == 4 ): ?>
-						<div class="accordion bg-danger" id="accordionExample4">
-					<?php endif ?>
-					<?php if ($value['idsubsecretaria'] == 5 ): ?>
-						<div class="accordion bg-warning" id="accordionExample5">
-					<?php endif ?>
-						<div class="card">
-							<div class="card-header" id="headingOne">
-								<h5 class="mb-0">
-									<button class="btn btn-link" onclick="traerUsuarios(<?=  $value['idsubsecretaria']?>)" type="button" data-toggle="collapse" data-target="#collapse<?= $value['idsubsecretaria']?>" aria-expanded="true" aria-controls="collapse<?= $value['idsubsecretaria']?>">
-											<p><?= $value['subsecretaria']?></p>
-									</button>
-								</h5>
-							</div>
+					<div  class="fondo<?=  $value['idsubsecretaria']?>">
+						<p><a data-toggle="collapse"  onclick="traerUsuarios(<?=  $value['idsubsecretaria']?>)" href="#subsecretaria<?= $value['idsubsecretaria']?>" aria-expanded="false" aria-controls="subsecretaria<?= $value['idsubsecretaria']?>">
+				
+									<?= $value['subsecretaria']?></a>
+								
+								</p>
 
-							<div id="collapse<?= $value['idsubsecretaria']?>" class="collapse" aria-labelledby="headingOne" data-parent="#accordionExample<?= $value['idsubsecretaria']?>">
+							<div class="collapse" id="subsecretaria<?= $value['idsubsecretaria']?>">
 								<div id="card<?=$value['idsubsecretaria']?>" class="card-body">
 
 								</div>
 							</div>
-						</div>
-					</div>
+							</div>
 					<!-- fin Acordeón -->
 
 				<?php } ?>

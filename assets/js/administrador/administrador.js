@@ -1,5 +1,6 @@
 
 	function traerUsuarios(id) {
+    if (!$("#subsecretaria"+id).hasClass("in")) {
 		$.ajax({
 			url: 'Administrador/getUsuario',
 			type: 'POST',
@@ -7,10 +8,12 @@
 			success : function(data) {
 				$('#card'+id).html(data);
 			}
-		});		
+    });		
+  } 
 	}
 
 	function traerArchivos(id) {
+    if (!$("#collapse"+id).hasClass("in")) {
 		$.ajax({
 			url: 'Administrador/getArchivos',
 			type: 'POST',
@@ -18,7 +21,8 @@
 			success : function(data) {
 				$('#archivos'+id).html(data);
 			}
-		});		
+    });	
+  }
 	}
 
 	function mostrar_encuesta(idaplicar, usuario) {
