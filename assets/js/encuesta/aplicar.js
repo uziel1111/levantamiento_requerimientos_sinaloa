@@ -206,7 +206,6 @@ $("#btn_encuesta_guardar").click(function(e){
         
         if($("input[type='textarea']") || $("input[type='text']")){
           i++;
-          console.log($("#textarea"+i).data('tamanio') + ' : ' + $("#textarea"+i).data('tamanio')+' : '+$("#textarea"+i).val()+': $("#textarea"'+i+')');
           if($("#textarea"+i).data('tamanio') != undefined && $("#textarea"+i).val().length > $("#textarea"+i).data('tamanio')){
             $("#span"+i).html("El texto no puede ser mayor a "+$("#textarea"+i).data('tamanio')+" carateres");
             error++;
@@ -218,6 +217,8 @@ $("#btn_encuesta_guardar").click(function(e){
             if($(elem).val() == ''){
               $(elem).css({'border':'1px solid red'});
               error++;
+            }  else {
+              $('#label_'+elem.name).html('');
             }
             break;
             case "checkbox":
@@ -231,6 +232,8 @@ $("#btn_encuesta_guardar").click(function(e){
                   if(!$("input[name="+elem.name+"]:checked").val()) {
                       $('#label_'+elem.name).html('seleccione <br />');
                       error++;
+                  } else {
+                    $('#label_'+elem.name).html('');
                   }
                 }
 
@@ -246,6 +249,8 @@ $("#btn_encuesta_guardar").click(function(e){
                   if(!$("input[name="+elem.name+"]:checked").val()) {
                       $('#label_'+elem.name).html('seleccione <br />');
                       error++;
+                  } else {
+                    $('#label_'+elem.name).html('');
                   }
                 }
 
@@ -260,6 +265,8 @@ $("#btn_encuesta_guardar").click(function(e){
                   if($(elem).val() =="0") {
                       $('#label_'+elem.name).html('seleccione <br />');
                       error++;
+                  } else {
+                    $('#label_'+elem.name).html('');
                   }
                 }
 

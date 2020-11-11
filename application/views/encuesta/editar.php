@@ -88,7 +88,8 @@
                                <?php }
                              }?>
                         <?php endforeach; ?>
-                        > <?= ($complemento['complemento']=='Otro <input type="text" name="otro_input">')? 'Otro <input type="text" name="otro_input" value="'.$array_respuetas[$key+2]['complemento'].'">':$complemento['complemento'] ?>
+                        > <?= ($complemento['complemento']=='Otro <input type="text" name="otro_input">')? 'Otro <input type="text" name="otro_input" value="'.$array_respuetas[$keyp+(($array_respuetas[1]['idpregunta']==26)?4:2)]['complemento'].'">':$complemento['complemento'] ?>
+                    
                       </label>
                       <label id="label_<?= $pregunta['idpregunta'] ?>" class="error"></label>
                 </div>
@@ -99,7 +100,7 @@
                 <select class="requerido" data-idpregunta="<?= $pregunta['idpregunta'] ?>" name="<?= $pregunta['idpregunta'] ?>">
                   <option value="0">Seleccione una opción</option>
                   <?php $i=0; foreach ($pregunta['array_complemento'] as $key => $complemento) {
-                     if ($array_respuetas[$keyp+1]['respuesta'] == ($complemento['orden'])) {
+                     if ($array_respuetas[$keyp+(($array_respuetas[1]['idpregunta']==26)?3:1)]['respuesta'] == ($complemento['orden'])) {
                       $selected = 'selected';
                     } else {
                       $selected = '';

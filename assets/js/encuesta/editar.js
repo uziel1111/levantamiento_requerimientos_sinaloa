@@ -203,6 +203,8 @@ $("#btn_encuesta_editar").click(function(e){
             if($(elem).val() == ''){
               $(elem).css({'border':'1px solid red'});
               error++;
+            } else {
+              $(elem).css({'border':'1px solid #ccc'});
             }
             break;
             case "checkbox":
@@ -235,7 +237,7 @@ $("#btn_encuesta_editar").click(function(e){
                             }
                           }
                     }
-
+                    $('#label_'+elem.name).html('');
                         // console.log(idpregunta);
                         // console.log(array_ids_ok);
 
@@ -257,6 +259,7 @@ $("#btn_encuesta_editar").click(function(e){
                     error++;
                 }
                 else {
+                  $('#label_'+elem.name).html('');
                   if ($("input[name="+elem.name+"]:checked").val()) {
                     // let valor = $("input[name="+elem.name+"]").val();
                     var arr = $("[name="+elem.name+"]:checked").map(function(){
@@ -273,7 +276,6 @@ $("#btn_encuesta_editar").click(function(e){
                           }
                         }
                   }
-
                       // console.log(idpregunta);
                       // console.log(array_ids_ok);
 
@@ -291,6 +293,8 @@ $("#btn_encuesta_editar").click(function(e){
                   if($(elem).val() =="0") {
                       $('#label_'+elem.name).html('seleccione <br />');
                       error++;
+                  } else {
+                    $('#label_'+elem.name).html('');
                   }
                 }
 
