@@ -35,11 +35,12 @@
 
           <?php if($dato['idtipopregunta'] == PREGUNTA_UNAOPCION){ ?>
             <!--  -->
+
             <?php foreach ($dato['array_final'] as $key => $opcion) { ?>
               <div class='col-xs-12'>
                 <label class='checkbox-inline'>
                   <input disabled class='requerido' type='radio' <?= ( (isset($opcion['checked'])) && (strlen($opcion['checked'])>0) )?'checked':'' ?> >
-                  <?=($opcion['complemento']=='Otro <input type="text" name="otro_input">')? 'Otro <input type="text" name="otro_input" value="'.$opcion['input_otro'].'">':$opcion['complemento']?>
+                  <?=($opcion['complemento']=='Otro <input type="text" name="otro_input">')? 'Otro <input type="text" readonly name="otro_input" value="'.((isset($opcion['input_otro']))?$opcion['input_otro']:'').'">':$opcion['complemento']?>
                 </label>
               </div>
             <?php } ?>
@@ -130,7 +131,7 @@
                   </div>
                 </div> -->
                 <!-- sección nueva de administrador -->
-              <!-- <?php // } ?> 
+              <!-- <?php // } ?>
             <?php //} ?> -->
             <div class='col-xs-12 col-sm-12 col-md-4 col-lg-4'></div>
           </div><!-- .row -->
