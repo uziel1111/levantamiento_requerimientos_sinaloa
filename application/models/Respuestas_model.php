@@ -170,15 +170,17 @@ class Respuestas_model extends CI_Model {
     function update_respuestas($respuestas, $nombre_archivo, $id_aplica,$idusuario){
       $fecha = date("Y-m-d H:i:s");
       $band= FALSE;
-      // echo "<pre>";print_r($respuestas['array_datos']);die();
+      $where_delete = ($idusuario == 1) ? '' : ' AND p.idtipousuario = 2';
+      // echo "<pre>";print_r($idusuario);die();]
       $this->db->trans_start();
 
 
       // echo "<pre>";print_r($id_aplica);die();
       if ($id_aplica > 0) {
         if ($nombre_archivo!='') {
-          $str_query = " DELETE FROM respuesta
-            WHERE idaplicar = {$id_aplica}
+          $str_query = " DELETE r FROM respuesta r
+          INNER JOIN pregunta p on r.idpregunta = p.idpregunta
+            WHERE r.idaplicar = {$id_aplica}  { $where_delete}
           ";
            $estatus_elim = $this->db->query($str_query);
            if ($estatus_elim) {
@@ -200,8 +202,9 @@ class Respuestas_model extends CI_Model {
 
         }
         else {
-          $str_query = " DELETE FROM respuesta
-            WHERE idaplicar = {$id_aplica} AND !ISNULL(idpregunta)
+          $str_query = " DELETE r FROM respuesta r
+          INNER JOIN pregunta p on r.idpregunta = p.idpregunta
+            WHERE r.idaplicar = {$id_aplica} AND !ISNULL(r.idpregunta)  {$where_delete}
           ";
            $estatus_elim = $this->db->query($str_query);
            if ($estatus_elim) {

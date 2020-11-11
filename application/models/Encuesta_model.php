@@ -140,7 +140,7 @@ class Encuesta_model extends CI_Model {
 function get_nombre_evidencia($idaplicar){
   $str_query = " SELECT res.respuesta as respuesta
   FROM respuesta res
-  WHERE res.idaplicar = {$idaplicar} AND res.idpregunta = 1
+  WHERE res.idaplicar = {$idaplicar} AND res.idpregunta = 4
   ";
   return $this->db->query($str_query)->row('respuesta');
 }// get_nombre_evidencia()
