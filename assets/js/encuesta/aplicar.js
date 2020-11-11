@@ -264,6 +264,15 @@ $("#btn_encuesta_guardar").click(function(e){
                 }
 
             break;
+            case "text":
+            if($(elem).val() == ''){
+              $(elem).css({'border':'1px solid red'});
+              error++;
+            } else {
+              $(elem).css({'border':'1px solid #ccc '});
+            }
+            break;
+
           }
 
         });

@@ -14,7 +14,7 @@
 
       <?php $array_idpreguntas = array(); $i=0;?>
 
-      <?php foreach ($array_preguntas as $key => $pregunta) { array_push($array_idpreguntas, $pregunta['idpregunta'].'/'.$pregunta['idtipopregunta'] ); ?>
+      <?php foreach ($array_preguntas as $keyp => $pregunta) { array_push($array_idpreguntas, $pregunta['idpregunta'].'/'.$pregunta['idtipopregunta'] ); ?>
         <?php if($pregunta['idtipousuario'] == $_SESSION['datos_usuario_ceeo']['idtipousuario'] || $_SESSION['datos_usuario_ceeo']['idtipousuario'] == U_ADMINISTRADOR ){ ?>
         <input type="hidden" id="tipo_usuario" value = "<?= $_SESSION['datos_usuario_ceeo']['idtipousuario'] ?>">
         <div class="row margintop10">
@@ -22,7 +22,7 @@
               <label><?= $pregunta['npregunta'] ?>.- <?= $pregunta['pregunta'] ?></label> <i class="fa fa-info-circle" data-toggle="tooltip" data-placement="top" title="<?= $pregunta['instructivo'] ?>"></i>
             </div>
             <?php if($pregunta['idtipopregunta'] == PREGUNTA_ABIERTA){ ?>
-              <?php if ($pregunta['npregunta']==4 || $pregunta['npregunta']==5 || $pregunta['npregunta']==7 || $pregunta['npregunta']==8 || $pregunta['npregunta']==14 || $pregunta['npregunta']==17 || $pregunta['npregunta']==18){ $i++?>
+              <?php if ($pregunta['npregunta']==14  || $pregunta['npregunta']==25 ){ $i++;?>
                 <div class='col-xs-12'>
                 <?php if($pregunta['tamanio_campo'] > 80) {?>
                   <textarea data-idpregunta="<?= $pregunta['idpregunta'] ?>" class='form-control textarea_blur' rows='2' name="<?= $pregunta['idpregunta'] ?>" style="height: <?= ($pregunta['tamanio_campo'] == 250)?'60px':'120px'?>;"  data-tamanio ="<?= $pregunta['tamanio_campo']?>"  maxlength="<?= $pregunta['tamanio_campo']?>" id="textarea<?=$i?>"><?php foreach ($array_respuetas as $key => $value){ if ($value['idpregunta']==$pregunta['idpregunta']){ echo $value['respuesta']; } } ?></textarea>
@@ -98,14 +98,15 @@
                 <div class='col-xs-12'>
                 <select class="requerido" data-idpregunta="<?= $pregunta['idpregunta'] ?>" name="<?= $pregunta['idpregunta'] ?>">
                   <option value="0">Seleccione una opción</option>
-                  <?php foreach ($pregunta['array_complemento'] as $key => $complemento) {
-                     if ($array_respuetas[$key]['respuesta'] == ($complemento['orden']-1)) {
+                  <?php $i=0; foreach ($pregunta['array_complemento'] as $key => $complemento) {
+                     if ($array_respuetas[$keyp+1]['respuesta'] == ($complemento['orden'])) {
                       $selected = 'selected';
                     } else {
                       $selected = '';
                     }
+                    $i++;
                     ?>
-                  <option value="<?= $complemento['orden'] ?>" <?= $selected ?> ><?= $complemento['complemento'] ?></option>
+                  <option value="<?= $complemento['orden'] ?>" <?= $selected ?> ><?= $complemento['complemento']?></option>
                   <?php } ?>
                 </select>
                 <label id="label_<?= $pregunta['idpregunta'] ?>" class="error"></label>

@@ -281,6 +281,28 @@ $("#btn_encuesta_editar").click(function(e){
               }
 
             break;
+            case "select-one":
+              // let idpregunta = $(elem).data('idpregunta');
+
+                if(array_preguntas.includes(idpregunta)){
+                  // console.log("if includes");
+                }else{
+                  array_preguntas.push(idpregunta);
+                  if($(elem).val() =="0") {
+                      $('#label_'+elem.name).html('seleccione <br />');
+                      error++;
+                  }
+                }
+
+                break;
+                case "text":
+                if($(elem).val() == ''){
+                  $(elem).css({'border':'1px solid red'});
+                  error++;
+                } else {
+                  $(elem).css({'border':'1px solid #ccc '});
+                }
+                break;
           }
             
         });
