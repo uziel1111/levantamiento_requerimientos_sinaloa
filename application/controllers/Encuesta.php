@@ -429,6 +429,7 @@ class Encuesta extends CI_Controller {
         $array_final_aux['idpregunta'] = $pregunta_ok['idpregunta'];
         $array_final_aux['pregunta'] = $pregunta_ok['pregunta'];
         $array_final_aux['idtipopregunta'] = $pregunta_ok['idtipopregunta'];
+        $array_final_aux['tamanio_campo'] = $pregunta_ok['tamanio_campo'];
         $array_final_aux['npregunta'] = $pregunta_ok['npregunta'];
         $array_final_aux['instructivo'] = $pregunta_ok['instructivo'];
         $array_final_aux['respuesta'] = $pregunta_ok['respuesta'];

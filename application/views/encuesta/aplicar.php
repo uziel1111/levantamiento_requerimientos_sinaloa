@@ -22,12 +22,20 @@
             <?php if($pregunta['idtipopregunta'] == PREGUNTA_ABIERTA){ ?>
               <?php if ($pregunta['npregunta']==4 || $pregunta['npregunta']==5 || $pregunta['npregunta']==7 || $pregunta['npregunta']==8 || $pregunta['npregunta']==14 || $pregunta['npregunta']==17 || $pregunta['npregunta']==18){ $i++;?>
                 <div class='col-xs-12'>
-                  <textarea data-idpregunta="<?= $pregunta['idpregunta'] ?>" class='form-control textarea_blur' rows='2' name="<?= $pregunta['idpregunta'] ?>" style="height: 120px;"  data-tamanio ="<?= $pregunta['tamanio_campo']?>"  maxlength="<?= $pregunta['tamanio_campo']?>" id="textarea<?=$i?>"></textarea>
+                <?php if($pregunta['tamanio_campo'] > 80) {?>
+                  <textarea data-idpregunta="<?= $pregunta['idpregunta'] ?>" class='form-control textarea_blur' rows='2' name="<?= $pregunta['idpregunta'] ?>" style="height: <?= ($pregunta['tamanio_campo'] == 250)?'60px':'120px'?>;"  data-tamanio ="<?= $pregunta['tamanio_campo']?>"  maxlength="<?= $pregunta['tamanio_campo']?>" id="textarea<?=$i?>"></textarea>
+                  <?php } else { ?>
+                    <input type="text" data-idpregunta="<?= $pregunta['idpregunta'] ?>" class='form-control textarea_blur' name="<?= $pregunta['idpregunta'] ?>"  data-tamanio ="<?= $pregunta['tamanio_campo']?>" style="width: <?= ($pregunta['tamanio_campo'] < 80)?'80px':'100%'?>;"    maxlength="<?= $pregunta['tamanio_campo']?>" id="textarea<?=$i?>"/>
+                  <?php } ?>
                   <span style="color:red" id="span<?=$i?>"></span>
                 </div>
               <?php } else { $i++;?>
               <div class='col-xs-12'>
-                <textarea data-idpregunta="<?= $pregunta['idpregunta'] ?>" class='form-control requerido textarea_blur' rows='2' name="<?= $pregunta['idpregunta'] ?>" style="height: 120px;"  data-tamanio ="<?= $pregunta['tamanio_campo']?>"  maxlength="<?= $pregunta['tamanio_campo']?>" id="textarea<?=$i?>"></textarea>
+              <?php if($pregunta['tamanio_campo'] > 80) {?>
+                <textarea data-idpregunta="<?= $pregunta['idpregunta'] ?>" class='form-control requerido textarea_blur' rows='2' name="<?= $pregunta['idpregunta'] ?>" style="height: <?= ($pregunta['tamanio_campo'] == 250)?'60px':'120px'?>;"  data-tamanio ="<?= $pregunta['tamanio_campo']?>"  maxlength="<?= $pregunta['tamanio_campo']?>" id="textarea<?=$i?>"></textarea>
+                <?php } else { ?>
+                  <input type="text" data-idpregunta="<?= $pregunta['idpregunta'] ?>" class='form-control requerido textarea_blur' name="<?= $pregunta['idpregunta'] ?>"  data-tamanio ="<?= $pregunta['tamanio_campo']?>" style="width: <?= ($pregunta['tamanio_campo'] < 80)?'80px':'100%'?>;"    maxlength="<?= $pregunta['tamanio_campo']?>" id="textarea<?=$i?>"/>
+                  <?php } ?>
                 <span style="color:red" id="span<?=$i?>"></span>
               </div>
             <?php } } ?>

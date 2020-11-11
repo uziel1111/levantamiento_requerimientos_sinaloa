@@ -203,6 +203,16 @@ $("#btn_encuesta_guardar").click(function(e){
       let array_preguntas = [];
       $('.requerido').each(function(i, elem){
         let idpregunta = $(elem).data('idpregunta');
+        
+        if($("input[type='textarea']") || $("input[type='text']")){
+          i++;
+          console.log($("#textarea"+i).data('tamanio') + ' : ' + $("#textarea"+i).data('tamanio')+' : '+$("#textarea"+i).val()+': $("#textarea"'+i+')');
+          if($("#textarea"+i).data('tamanio') != undefined && $("#textarea"+i).val().length > $("#textarea"+i).data('tamanio')){
+            $("#span"+i).html("El texto no puede ser mayor a "+$("#textarea"+i).data('tamanio')+" carateres");
+            error++;
+          }
+        }
+
           switch (elem.type) {
             case "textarea":
             if($(elem).val() == ''){
@@ -255,14 +265,8 @@ $("#btn_encuesta_guardar").click(function(e){
 
             break;
           }
-          if($("input[type='textarea']")){
-            i++;
-            if($("#textarea"+i).data('tamanio') != undefined && $("#textarea"+i).val().length > $("#textarea"+i).data('tamanio')){
-              $("#span"+i).html("El texto no puede ser mayor a "+$("#textarea"+i).data('tamanio')+" carateres");
-            }
-          }
-        });
 
+        });
         if(error > 0){
           return false;
         }else{

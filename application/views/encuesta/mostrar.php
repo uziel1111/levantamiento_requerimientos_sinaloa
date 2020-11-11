@@ -18,7 +18,11 @@
           </div>
           <?php if($dato['idtipopregunta'] == PREGUNTA_ABIERTA){ ?>
             <div class='col-xs-12'>
-              <textarea class='form-control' style="height: 120px;" rows='2' readonly><?= (isset($dato['respuesta']))?$dato['respuesta']:'' ?></textarea>
+            <?php if($dato['tamanio_campo'] > 80) {?>
+              <textarea class='form-control' style="height: <?= ($dato['tamanio_campo'] == 250)?'60px':'120px'?>;" rows='2' readonly><?= (isset($dato['respuesta']))?$dato['respuesta']:'' ?></textarea>
+              <?php } else { ?>
+                <input type="text"  style="width: <?= ($dato['tamanio_campo'] < 80)?'80px':'100%'?>;" class='form-control' readonly value="<?= (isset($dato['respuesta']))?$dato['respuesta']:'' ?>"/>
+                <?php } ?>
             </div><!-- .col-xs-12 -->
           <?php } ?>
           <?php if($dato['idtipopregunta'] == PREGUNTA_OPCIONMULTIPLE){ ?>

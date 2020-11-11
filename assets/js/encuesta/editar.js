@@ -185,9 +185,19 @@ $("#btn_encuesta_editar").click(function(e){
       let error = 0;
       let arr_respuestas = [];
       let array_preguntas = [];
+      var aux = 0;
       $('.requerido').each(function(r, elem){
         // console.log(r);
         let idpregunta = $(elem).data('idpregunta');
+        if($("input[type='textarea']") || $("input[type='text']")){
+          aux++;
+          
+          if($("#textarea"+aux).data('tamanio') != undefined && $("#textarea"+aux).val().length > $("#textarea"+aux).data('tamanio')){
+            $("#span"+aux).html("El texto no puede ser mayor a "+$("#textarea"+aux).data('tamanio')+" carateres");
+            error++;
+          }
+        }
+
           switch (elem.type) {
             case "textarea":
             if($(elem).val() == ''){
@@ -272,8 +282,8 @@ $("#btn_encuesta_editar").click(function(e){
 
             break;
           }
+            
         });
-
         if(error > 0){
           return false;
         }else{

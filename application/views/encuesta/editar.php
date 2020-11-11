@@ -12,7 +12,7 @@
 
         <input type="text" name="id_aplicar" value="<?=$id_aplicar ?>" hidden>
 
-      <?php $array_idpreguntas = array(); ?>
+      <?php $array_idpreguntas = array(); $i=0;?>
 
       <?php foreach ($array_preguntas as $key => $pregunta) { array_push($array_idpreguntas, $pregunta['idpregunta'].'/'.$pregunta['idtipopregunta'] ); ?>
         <?php if($pregunta['idtipousuario'] == $_SESSION['datos_usuario_ceeo']['idtipousuario'] || $_SESSION['datos_usuario_ceeo']['idtipousuario'] == U_ADMINISTRADOR ){ ?>
@@ -22,17 +22,28 @@
               <label><?= $pregunta['npregunta'] ?>.- <?= $pregunta['pregunta'] ?></label> <i class="fa fa-info-circle" data-toggle="tooltip" data-placement="top" title="<?= $pregunta['instructivo'] ?>"></i>
             </div>
             <?php if($pregunta['idtipopregunta'] == PREGUNTA_ABIERTA){ ?>
-              <?php if ($pregunta['npregunta']==4 || $pregunta['npregunta']==5 || $pregunta['npregunta']==7 || $pregunta['npregunta']==8 || $pregunta['npregunta']==14 || $pregunta['npregunta']==17 || $pregunta['npregunta']==18){?>
+              <?php if ($pregunta['npregunta']==4 || $pregunta['npregunta']==5 || $pregunta['npregunta']==7 || $pregunta['npregunta']==8 || $pregunta['npregunta']==14 || $pregunta['npregunta']==17 || $pregunta['npregunta']==18){ $i++?>
                 <div class='col-xs-12'>
-                  <textarea data-idpregunta="<?= $pregunta['idpregunta'] ?>" class='form-control textarea_blur' rows='2' name="<?= $pregunta['idpregunta'] ?>" style="height: 120px;"  data-tamanio ="<?= $pregunta['tamanio_campo']?>"  maxlength="<?= $pregunta['tamanio_campo']?>"><?php foreach ($array_respuetas as $key => $value){ if ($value['idpregunta']==$pregunta['idpregunta']){ echo $value['respuesta']; } } ?></textarea>
+                <?php if($pregunta['tamanio_campo'] > 80) {?>
+                  <textarea data-idpregunta="<?= $pregunta['idpregunta'] ?>" class='form-control textarea_blur' rows='2' name="<?= $pregunta['idpregunta'] ?>" style="height: <?= ($pregunta['tamanio_campo'] == 250)?'60px':'120px'?>;"  data-tamanio ="<?= $pregunta['tamanio_campo']?>"  maxlength="<?= $pregunta['tamanio_campo']?>" id="textarea<?=$i?>"><?php foreach ($array_respuetas as $key => $value){ if ($value['idpregunta']==$pregunta['idpregunta']){ echo $value['respuesta']; } } ?></textarea>
+                  <?php } else { ?>
+                    <input type="text"  style="width: <?= ($pregunta['tamanio_campo'] < 80)?'80px':'100%'?>;" data-idpregunta="<?= $pregunta['idpregunta'] ?>" class='form-control textarea_blur' name="<?= $pregunta['idpregunta'] ?>" data-tamanio ="<?= $pregunta['tamanio_campo']?>"  maxlength="<?= $pregunta['tamanio_campo']?>" id="textarea<?=$i?>" value="<?php foreach ($array_respuetas as $key => $value){ if ($value['idpregunta']==$pregunta['idpregunta']){ echo $value['respuesta']; } } ?>" />
+                    <?php } ?>
+                    <span style="color:red" id="span<?=$i?>"></span>
                 </div>
               <!-- <div class='col-xs-12'>
                 <textarea style="height: 120px;" data-idpregunta="<?= $pregunta['idpregunta'] ?>" class='form-control textarea_blur' rows='2' name="<?= $pregunta['idpregunta'] ?>"><?php foreach ($array_respuetas as $key => $value){ if ($value['idpregunta']==$pregunta['idpregunta']){ echo $value['respuesta']; } } ?></textarea>
               </div> -->
-              <?php } else {?>
+              <?php } else { $i++;?>
               <div class='col-xs-12'>
-                <textarea style="height: 120px;" data-idpregunta="<?= $pregunta['idpregunta'] ?>" class='form-control requerido textarea_blur' rows='2' name="<?= $pregunta['idpregunta'] ?>"><?php foreach ($array_respuetas as $key => $value){ if ($value['idpregunta']==$pregunta['idpregunta']){ echo $value['respuesta']; } } ?></textarea>
-              </div>
+              
+              <?php if($pregunta['tamanio_campo'] > 80) {?>
+                <textarea data-tamanio ="<?= $pregunta['tamanio_campo']?>"  style="height: <?= ($pregunta['tamanio_campo'] == 250)?'60px':'120px'?>;" data-idpregunta="<?= $pregunta['idpregunta'] ?>" class='form-control requerido textarea_blur' rows='2' name="<?= $pregunta['idpregunta'] ?>"  id="textarea<?=$i?>" ><?php foreach ($array_respuetas as $key => $value){ if ($value['idpregunta']==$pregunta['idpregunta']){ echo $value['respuesta']; } } ?></textarea>
+                <?php } else { ?>
+                  <input type="text" data-tamanio ="<?= $pregunta['tamanio_campo']?>"   style="width: <?= ($pregunta['tamanio_campo'] < 80)?'80px':'100%'?>;" data-idpregunta="<?= $pregunta['idpregunta'] ?>" class='form-control requerido textarea_blur' name="<?= $pregunta['idpregunta'] ?>"  id="textarea<?=$i?>"  value="<?php foreach ($array_respuetas as $key => $value){ if ($value['idpregunta']==$pregunta['idpregunta']){ echo $value['respuesta']; } } ?>" />
+                  <?php } ?>
+                  <span style="color:red" id="span<?=$i?>"></span>
+                 </div>
             <?php } } ?>
             <?php if($pregunta['idtipopregunta'] == PREGUNTA_OPCIONMULTIPLE){ ?>
 
