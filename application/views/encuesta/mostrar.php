@@ -68,7 +68,8 @@
           <!-- <div class='col-xs-12 col-sm-12 col-md-8 col-lg-8'> -->
             <div class='col-xs-5 col-sm-5 col-md-5 col-lg-5'>
               <label>Archivo adjunto:</label><br>
-              <iframe src="https://docs.google.com/viewer?url=<?= base_url($file_path) ?>&embedded=true" width="100%" height="500" style="border: none;"></iframe>
+              <!-- <iframe src="https://docs.google.com/viewer?url=<?= base_url($file_path) ?>&embedded=true" width="100%" height="500" style="border: none;"></iframe> -->
+              <iframe class="img-fluid" alt="Responsive image" id="image_aplicar" name="image_aplicar" src="<?=base_url($file_path)?>" ></iframe>
             </div><!-- .col-lg-8 -->
           <?php }else { ?>
             <!-- <div class='col-xs-12 col-sm-12 col-md-8 col-lg-8'> -->

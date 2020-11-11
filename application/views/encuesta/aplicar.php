@@ -20,7 +20,7 @@
               <label><?= $pregunta['npregunta'] ?>.- <?= $pregunta['pregunta'] ?></label> <i class="fa fa-info-circle" data-toggle="tooltip" data-placement="top" title="<?= $pregunta['instructivo'] ?>"></i>
             </div>
             <?php if($pregunta['idtipopregunta'] == PREGUNTA_ABIERTA){ ?>
-              <?php if ($pregunta['npregunta']==17 || $pregunta['npregunta']==10){ $i++;?>
+              <?php if ($pregunta['npregunta']==4 || $pregunta['npregunta']==5 || $pregunta['npregunta']==7 || $pregunta['npregunta']==8 || $pregunta['npregunta']==17 || $pregunta['npregunta']==18){ $i++;?>
                 <div class='col-xs-12'>
                   <textarea data-idpregunta="<?= $pregunta['idpregunta'] ?>" class='form-control textarea_blur' rows='2' name="<?= $pregunta['idpregunta'] ?>" style="height: 120px;"  data-tamanio ="<?= $pregunta['tamanio_campo']?>"  maxlength="<?= $pregunta['tamanio_campo']?>" id="textarea<?=$i?>"></textarea>
                   <span style="color:red" id="span<?=$i?>"></span>
