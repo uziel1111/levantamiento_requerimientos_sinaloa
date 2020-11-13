@@ -52,7 +52,7 @@
           <?php } ?>
           <?php if($dato['idtipopregunta'] == PREGUNTA_UNAOPCION_SLC){?>
                 <div class='col-xs-12'>
-                <select class="requerido" data-idpregunta="<?= $dato['idpregunta'] ?>" name="<?= $dato['idpregunta'] ?>" disabled>
+                <select class="requerido form-control" data-idpregunta="<?= $dato['idpregunta'] ?>" name="<?= $dato['idpregunta'] ?>" disabled>
                   <option value="<?= $respuesta_slc[$aux]['respuesta'] ?>" selected><?= $respuesta_slc[$aux]['complemento']?></option>
                 </select>
                 <label id="label_<?= $dato['idpregunta'] ?>" class="error"></label>

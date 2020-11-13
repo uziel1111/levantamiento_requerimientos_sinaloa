@@ -22,7 +22,7 @@
               <label><?= $pregunta['npregunta'] ?>.- <?= $pregunta['pregunta'] ?></label> <i class="fa fa-info-circle" data-toggle="tooltip" data-placement="top" title="<?= $pregunta['instructivo'] ?>"></i>
             </div>
             <?php if($pregunta['idtipopregunta'] == PREGUNTA_ABIERTA){ ?>
-              <?php if ($pregunta['npregunta']==14  || $pregunta['npregunta']==25 ){ $i++;?>
+              <?php if ($pregunta['npregunta']==14  || $pregunta['npregunta']==25 || $pregunta['npregunta']==23  || $pregunta['npregunta']==27 ){ $i++;?>
                 <div class='col-xs-12'>
                 <?php if($pregunta['tamanio_campo'] > 80) {?>
                   <textarea data-idpregunta="<?= $pregunta['idpregunta'] ?>" class='form-control textarea_blur' rows='2' name="<?= $pregunta['idpregunta'] ?>" style="height: <?= ($pregunta['tamanio_campo'] == 250)?'60px':'120px'?>;"  data-tamanio ="<?= $pregunta['tamanio_campo']?>"  maxlength="<?= $pregunta['tamanio_campo']?>" id="textarea<?=$i?>"><?php foreach ($array_respuetas as $key => $value){ if ($value['idpregunta']==$pregunta['idpregunta']){ echo $value['respuesta']; } } ?></textarea>
@@ -97,7 +97,7 @@
             <?php } ?>
             <?php if($pregunta['idtipopregunta'] == PREGUNTA_UNAOPCION_SLC){ ?>
                 <div class='col-xs-12'>
-                <select class="requerido" data-idpregunta="<?= $pregunta['idpregunta'] ?>" name="<?= $pregunta['idpregunta'] ?>">
+                <select class="requerido form-control" data-idpregunta="<?= $pregunta['idpregunta'] ?>" name="<?= $pregunta['idpregunta'] ?>">
                   <option value="0">Seleccione una opción</option>
                   <?php $i=0; foreach ($pregunta['array_complemento'] as $key => $complemento) {
                      if ($array_respuetas[$keyp+(($array_respuetas[1]['idpregunta']==26)?3:1)]['respuesta'] == ($complemento['orden'])) {

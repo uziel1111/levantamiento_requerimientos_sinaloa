@@ -171,7 +171,7 @@ $(document).on('change','.checkbox_change',function(e) {
 $("#btn_encuesta_guardar").click(function(e){
   e.preventDefault();
   if(!Aplicar.validar()){
-      Helpers.alert("Atienda los errores indicados", "error");
+      Helpers.alert("Complemente la información faltante", "error");
   }else{
 
     Aplicar.guardar();

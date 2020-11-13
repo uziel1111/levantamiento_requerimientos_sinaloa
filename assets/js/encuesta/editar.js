@@ -160,7 +160,7 @@ $(document).on('change','.checkbox_change',function(e) {
 $("#btn_encuesta_editar").click(function(e){
   e.preventDefault();
   if(!Aplicar.validar()){
-      Helpers.alert("Atienda los errores indicados", "error");
+      Helpers.alert("Complemente la información faltante", "error");
   }else{
 
     Aplicar.editar();
@@ -254,7 +254,7 @@ $("#btn_encuesta_editar").click(function(e){
                 array_preguntas.push(idpregunta);
                 // console.log(elem.name);
 
-                if(!$("input[name="+elem.name+"]:checked").val()) {
+                if(!$("input[name="+elem.name+"]:checked").val() && $("input[name="+elem.name+"]").data('idpregunta') != 26 ) {
                     $('#label_'+elem.name).html('seleccione <br />');
                     error++;
                 }
@@ -356,7 +356,7 @@ $("#btn_encuesta_editar").click(function(e){
           if((array_ids_ok[i]['tipo'] == 3) || (array_ids_ok[i]['tipo'] == '3')){ // sólo checkbox
                 let string_ok = '';   
                 let valor = '';
-           if( array_ids_ok[i]['idpregunta'] == '26' && $("#tipo_usuario").val()==2){ 
+           if( array_ids_ok[i]['idpregunta'] == '26' && !$("input[name=26]").is(":checked")){ 
             valor = '';
            } else {
             valor = valores[0]['valor'];

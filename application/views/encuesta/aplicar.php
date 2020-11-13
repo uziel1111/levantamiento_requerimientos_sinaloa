@@ -17,10 +17,10 @@
         <?php if($pregunta['idtipousuario'] == $_SESSION['datos_usuario_ceeo']['idtipousuario']){ ?>
         <div class="row margintop10">
             <div class='col-xs-12'>
-              <label><?= $pregunta['npregunta'] ?>.- <?= $pregunta['pregunta'] ?></label> <i class="fa fa-info-circle" data-toggle="tooltip" data-placement="top" title="<?= $pregunta['instructivo'] ?>"></i>
+        <label><?= $pregunta['npregunta'] ?>.- <?= $pregunta['pregunta'] ?></label> <?php if ($pregunta['instructivo'] != null) { ?><i class="fa fa-info-circle" data-toggle="tooltip" data-placement="top" title="<?= $pregunta['instructivo'] ?>"></i><?php } ?>
             </div>
             <?php if($pregunta['idtipopregunta'] == PREGUNTA_ABIERTA){ ?>
-              <?php if ($pregunta['npregunta']==14  || $pregunta['npregunta']==25 ){ $i++;?>
+              <?php if ($pregunta['npregunta']==14  || $pregunta['npregunta']==25 || $pregunta['npregunta']==23 ){ $i++;?>
                 <div class='col-xs-12'>
                 <?php if($pregunta['tamanio_campo'] > 80) {?>
                   <textarea data-idpregunta="<?= $pregunta['idpregunta'] ?>" class='form-control textarea_blur' rows='2' name="<?= $pregunta['idpregunta'] ?>" style="height: <?= ($pregunta['tamanio_campo'] == 250)?'60px':'120px'?>;"  data-tamanio ="<?= $pregunta['tamanio_campo']?>"  maxlength="<?= $pregunta['tamanio_campo']?>" id="textarea<?=$i?>"></textarea>
@@ -74,7 +74,7 @@
                   <?php if($key==0)  { ?>
                   <!-- <input type="hidden" id="itxt_aplicar_idpregunta_<?= $pregunta['idpregunta'] ?>" name="itxt_aplicar_idpregunta_<?= $pregunta['idpregunta'] ?>" value=""> -->
                 <?php } ?>
-                <select class="requerido" data-idpregunta="<?= $pregunta['idpregunta'] ?>" name="<?= $pregunta['idpregunta'] ?>">
+                <select class="requerido form-control" data-idpregunta="<?= $pregunta['idpregunta'] ?>" name="<?= $pregunta['idpregunta'] ?>">
                   <option value="0">Seleccione una opción</option>
                   <?php foreach ($pregunta['array_complemento'] as $key => $complemento) { ?>
                   <option value="<?= $complemento['orden'] ?>"><?= $complemento['complemento'] ?></option>
