@@ -149,7 +149,7 @@ class Respuestas_model extends CI_Model {
                   r.idrespuesta, r.idaplicar, r.idpregunta, p.idtipopregunta, r.respuesta, r.complemento, r.url_comple
                   FROM respuesta as r
                   LEFT JOIN pregunta p ON r.idpregunta= p.idpregunta
-                  WHERE r.idaplicar={$idaplica}
+                  WHERE r.idaplicar={$idaplica} order by r.idpregunta asc
       ";
                     // echo $str_query ; die();
        return $this->db->query($str_query)->result_array();
@@ -180,9 +180,11 @@ class Respuestas_model extends CI_Model {
         if ($nombre_archivo!='') {
           $str_query = " DELETE r FROM respuesta r
           INNER JOIN pregunta p on r.idpregunta = p.idpregunta
-            WHERE r.idaplicar = {$id_aplica}  { $where_delete}
+            WHERE r.idaplicar = {$id_aplica}  {$where_delete}
           ";
            $estatus_elim = $this->db->query($str_query);
+        $eliminar_archivo = "DELETE FROM respuesta WHERE idaplicar = {$id_aplica} and idpregunta is null";
+        $estatus_elim = $this->db->query($eliminar_archivo);
            if ($estatus_elim) {
              $ruta_archivos_save = "evidencias/{$idusuario}/{$id_aplica}/$nombre_archivo";
              $inserto = $this->insert_response("NULL", $ruta_archivos_save, $id_aplica, 4);
