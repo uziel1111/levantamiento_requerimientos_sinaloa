@@ -14,7 +14,7 @@
         <?php if($dato['idtipousuario'] == $_SESSION['datos_usuario_ceeo']['idtipousuario'] || $_SESSION['datos_usuario_ceeo']['idtipousuario'] == U_ADMINISTRADOR ){ ?>
         <div class="row margintop10">
           <div class='col-xs-12'>
-            <label><?= $dato['npregunta'] ?>.- <?= $dato['pregunta'] ?></label> <i class="fa fa-info-circle" data-toggle="tooltip" data-placement="top" title="<?= $dato['instructivo'] ?>"></i>
+            <label><?= $dato['npregunta'] ?>.- <?= $dato['pregunta'] ?></label>  <?php if ($dato['instructivo'] != null) { ?><i class="fa fa-info-circle" data-toggle="tooltip" data-placement="top" title="<?= $dato['instructivo'] ?>"></i><?php } ?>
           </div>
           <?php if($dato['idtipopregunta'] == PREGUNTA_ABIERTA){ ?>
             <div class='col-xs-12'>

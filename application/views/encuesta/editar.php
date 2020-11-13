@@ -19,7 +19,7 @@
         <input type="hidden" id="tipo_usuario" value = "<?= $_SESSION['datos_usuario_ceeo']['idtipousuario'] ?>">
         <div class="row margintop10">
             <div class='col-xs-12'>
-              <label><?= $pregunta['npregunta'] ?>.- <?= $pregunta['pregunta'] ?></label> <i class="fa fa-info-circle" data-toggle="tooltip" data-placement="top" title="<?= $pregunta['instructivo'] ?>"></i>
+              <label><?= $pregunta['npregunta'] ?>.- <?= $pregunta['pregunta'] ?></label>  <?php if ($pregunta['instructivo'] != null) { ?><i class="fa fa-info-circle" data-toggle="tooltip" data-placement="top" title="<?= $pregunta['instructivo'] ?>"></i><?php } ?>
             </div>
             <?php if($pregunta['idtipopregunta'] == PREGUNTA_ABIERTA){ ?>
               <?php if ($pregunta['npregunta']==14  || $pregunta['npregunta']==25 || $pregunta['npregunta']==23  || $pregunta['npregunta']==27 ){ $i++;?>
