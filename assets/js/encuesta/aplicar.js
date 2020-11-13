@@ -49,7 +49,7 @@ $('#ifile_aplicar').change(function() {
    else {
      $('#ifile_aplicar').val("");
      $('#image_aplicar').attr('src', '');
-     Helpers.alert("El formato del archivo seleccionado no está permitido o excede el tamaño máximo permitido (10MB), favor seleccione otro.", "error");
+     Helpers.alert("El formato del archivo seleccionado no está permitido o excede el tamaño máximo permitido (10MB), por favor seleccione otro.", "error");
    }
  }
 });
