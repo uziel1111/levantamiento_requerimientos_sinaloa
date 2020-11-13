@@ -30,26 +30,25 @@ $('#ifile_aplicar').change(function() {
   if (input.files && input.files[0]) {
   var file = input.files[0];
   var fileType = file.type;
+    if ((fileType== 'application/pdf' || fileType== 'image/jpeg') && file.size<10000000) {
+      pdffile_url=URL.createObjectURL(file);
 
-  if (fileType == '') {
-
-   $('#image_aplicar').attr('src', base_url+'/assets/img/document.svg');
-}else{
-
-  pdffile_url=URL.createObjectURL(file);
-
-      if (fileType.search('application/vnd')==0 ) {
-        $('#image_aplicar').attr('src', '');
-      }
-      else {
-        if (fileType.search('application/msword')==0 ) {
-          $('#image_aplicar').attr('src', '');
-        }
-        else {
-          $('#image_aplicar').attr('src', pdffile_url);
-        }
-      }
-
+          if (fileType.search('application/vnd')==0 ) {
+            $('#image_aplicar').attr('src', '');
+          }
+          else {
+            if (fileType.search('application/msword')==0 ) {
+              $('#image_aplicar').attr('src', '');
+            }
+            else {
+              $('#image_aplicar').attr('src', pdffile_url);
+            }
+          }
+    }
+    else {
+      $('#ifile_aplicar').val("");
+      $('#image_aplicar').attr('src', '');
+      Helpers.alert("El formato del archivo seleccionado no está permitido o excede el tamaño máximo permitido (10MB), favor seleccione otro.", "error");
     }
   }
 });
@@ -191,7 +190,7 @@ $("#btn_encuesta_editar").click(function(e){
         let idpregunta = $(elem).data('idpregunta');
         if($("input[type='textarea']") || $("input[type='text']")){
           aux++;
-          
+
           if($("#textarea"+aux).data('tamanio') != undefined && $("#textarea"+aux).val().length > $("#textarea"+aux).data('tamanio')){
             $("#span"+aux).html("El texto no puede ser mayor a "+$("#textarea"+aux).data('tamanio')+" carateres");
             error++;
@@ -308,7 +307,7 @@ $("#btn_encuesta_editar").click(function(e){
                 }
                 break;
           }
-            
+
         });
         if(error > 0){
           return false;
@@ -354,9 +353,9 @@ $("#btn_encuesta_editar").click(function(e){
           }
 
           if((array_ids_ok[i]['tipo'] == 3) || (array_ids_ok[i]['tipo'] == '3')){ // sólo checkbox
-                let string_ok = '';   
+                let string_ok = '';
                 let valor = '';
-           if( array_ids_ok[i]['idpregunta'] == '26' && !$("input[name=26]").is(":checked")){ 
+           if( array_ids_ok[i]['idpregunta'] == '26' && !$("input[name=26]").is(":checked")){
             valor = '';
            } else {
             valor = valores[0]['valor'];
@@ -376,7 +375,7 @@ $("#btn_encuesta_editar").click(function(e){
           */
       }
 
-      var file_data = $('.image').prop('files')[0];
+      // var file_data = $('.image').prop('files')[0];
       // if(file_data == undefined) {
       //   Helpers.alert("Seleccione archivo", "error");
       // }else{
@@ -394,9 +393,14 @@ $("#btn_encuesta_editar").click(function(e){
         console.info(array_ids_ok);
         // return false;
         */
-        // console.info(array_ids_ok);
-        Aplicar.editar_ok(array_ids_ok);
-      // }
+        // console.info($('#image_aplicar').attr('src'));
+
+        var file_data = $('.image').prop('files')[0];
+        if($('#image_aplicar').attr('src')=='') {
+          Helpers.alert("Seleccione archivo", "error");
+        }else{
+          Aplicar.editar_ok(array_ids_ok);
+        }
       return false;
 
 

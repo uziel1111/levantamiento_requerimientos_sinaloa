@@ -31,25 +31,25 @@ $('#ifile_aplicar').change(function() {
  var file = input.files[0];
  var fileType = file.type;
 
- if (fileType == '') {
+   if ((fileType== 'application/pdf' || fileType== 'image/jpeg') && file.size<10000000) {
+     pdffile_url=URL.createObjectURL(file);
 
-  $('#image_aplicar').attr('src', base_url+'/assets/img/document.svg');
-}else{
-
- pdffile_url=URL.createObjectURL(file);
-
-     if (fileType.search('application/vnd')==0 ) {
-       $('#image_aplicar').attr('src', '');
-     }
-     else {
-       if (fileType.search('application/msword')==0 ) {
-         $('#image_aplicar').attr('src', '');
-       }
-       else {
-         $('#image_aplicar').attr('src', pdffile_url);
-       }
-     }
-
+         if (fileType.search('application/vnd')==0 ) {
+           $('#image_aplicar').attr('src', '');
+         }
+         else {
+           if (fileType.search('application/msword')==0 ) {
+             $('#image_aplicar').attr('src', '');
+           }
+           else {
+             $('#image_aplicar').attr('src', pdffile_url);
+           }
+         }
+   }
+   else {
+     $('#ifile_aplicar').val("");
+     $('#image_aplicar').attr('src', '');
+     Helpers.alert("El formato del archivo seleccionado no está permitido o excede el tamaño máximo permitido (10MB), favor seleccione otro.", "error");
    }
  }
 });
@@ -182,7 +182,7 @@ $("#btn_encuesta_guardar").click(function(e){
   let Aplicar = {
 
     validar : () => {
-      
+
       $('.requerido').each(function(i, elem){
         // console.log(elem.type);
         switch (elem.type) {
@@ -203,7 +203,7 @@ $("#btn_encuesta_guardar").click(function(e){
       let array_preguntas = [];
       $('.requerido').each(function(i, elem){
         let idpregunta = $(elem).data('idpregunta');
-        
+
         if($("input[type='textarea']") || $("input[type='text']")){
           i++;
           if($("#textarea"+i).data('tamanio') != undefined && $("#textarea"+i).val().length > $("#textarea"+i).data('tamanio')){

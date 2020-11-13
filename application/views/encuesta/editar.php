@@ -36,7 +36,7 @@
               </div> -->
               <?php } else { $i++;?>
               <div class='col-xs-12'>
-              
+
               <?php if($pregunta['tamanio_campo'] > 80) {?>
                 <textarea data-tamanio ="<?= $pregunta['tamanio_campo']?>"  style="height: <?= ($pregunta['tamanio_campo'] == 250)?'60px':'120px'?>;" data-idpregunta="<?= $pregunta['idpregunta'] ?>" class='form-control requerido textarea_blur' rows='2' name="<?= $pregunta['idpregunta'] ?>"  id="textarea<?=$i?>" ><?php foreach ($array_respuetas as $key => $value){ if ($value['idpregunta']==$pregunta['idpregunta']){ echo $value['respuesta']; } } ?></textarea>
                 <?php } else { ?>
@@ -89,7 +89,7 @@
                              }?>
                         <?php endforeach; ?>
                         > <?= ($complemento['complemento']=='Otro <input type="text" name="otro_input">')? 'Otro <input type="text" name="otro_input" value="'.$array_respuetas[$keyp+(($array_respuetas[1]['idpregunta']==26)?4:2)]['complemento'].'">':$complemento['complemento'] ?>
-                    
+
                       </label>
                       <label id="label_<?= $pregunta['idpregunta'] ?>" class="error"></label>
                 </div>
