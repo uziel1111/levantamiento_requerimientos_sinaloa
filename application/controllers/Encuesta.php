@@ -42,11 +42,13 @@ class Encuesta extends CI_Controller {
 
 
   public function aplicar(){
+    $idusuario = $this->input->post('id_usuario_area');
     if(verifica_sesion_redirige($this)){
-      $usuario = $this->session->userdata[DATOSUSUARIO];
-      $tipo = $usuario["tipo"];
+      $usuario = (($idusuario!='')? $idusuario :$this->session->userdata[DATOSUSUARIO]);
+      $tipo = (($idusuario!='')?2:$usuario["tipo"]);
       $data["titulo"] = "";
       // $data["usuario"] = $tipo.' '.$usuario["nombre"]." ".$usuario["paterno"]." ".$usuario["materno"];
+      $data["idusuario"] = (($idusuario!='')? $idusuario :$usuario["tipo"]);
       $data["usuario"] = trae_datos_user($this,"");
 
       $array_preguntas = $this->Encuesta_model->get_cuestions();
@@ -112,13 +114,16 @@ class Encuesta extends CI_Controller {
 
 
   public function guardar(){
-     // echo "<pre>";print_r($_POST);die();
+     // echo "<pre>";print_r($_POST['idusuario']);die();
      // $nombre_archivo = str_replace(" ", "_", $_FILES['ifile_aplicar']['name']);
      // echo "<pre>";print_r($_FILES);die();
      if(verifica_sesion_redirige($this)){
       $band = TRUE;
       $estatus_arch = TRUE;
       $usuario = $this->session->userdata[DATOSUSUARIO];
+      $idusuario_aux = (($_POST['idusuario']!='ENCUESTADOR')?$_POST['idusuario']:$usuario['idusuario']);
+      unset($_POST['idusuario']);
+      // echo "<pre>";print_r($usuario);die();
        switch ($usuario['idsubsecretaria']) {
        case '1':
         $subsecretaria = 'multi_areas_'.$usuario['username'];
@@ -181,11 +186,13 @@ class Encuesta extends CI_Controller {
 
       // $id_aplica = $this->Aplicar_model->insert_aplica($usuario['idusuario']);
       // $estatus_insert = $this->Respuestas_model->insert_respuestas($array_respuestas,$id_aplica,$ruta_archivos_save);
-      $id_aplica = $this->Respuestas_model->insert_respuestas($array_respuestas,$nuevo_nombre_archivo,$usuario['idusuario']);
+
+      // echo "<pre>";print_r($idusuario_aux);die();
+      $id_aplica = $this->Respuestas_model->insert_respuestas($array_respuestas,$nuevo_nombre_archivo, $idusuario_aux);
 
       if ($id_aplica > 0) {
         if ($nuevo_nombre_archivo!='') {
-              $ruta_archivos = "evidencias/{$usuario['idusuario']}/{$id_aplica}/";
+              $ruta_archivos = "evidencias/{$idusuario_aux}/{$id_aplica}/";
               // $ruta_archivos_save = "evidencias/{$usuario['idusuario']}/{$id_aplica}/$nombre_archivo";
 
 

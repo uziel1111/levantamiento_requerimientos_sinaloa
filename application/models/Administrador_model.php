@@ -1,18 +1,18 @@
-<?php 
+<?php
 
 /**
- * 
+ *
  */
 class Administrador_model extends CI_Model
 {
-	
+
 	function __construct(){
 		parent::__construct();
 		date_default_timezone_set(ZONAHORARIA);
 	}
 
 	public function getTabla(){
-		$str_query = "SELECT count(r.url_comple) as total, a.idusuario, CONCAT(u.nombre, ' ' ,u.paterno, ' ', u.materno) as usuario, s.username, GROUP_CONCAT(r.url_comple) as archivos, a.fcreacion, u.idsubsecretaria, GROUP_CONCAT(a.idaplicar) AS idaplicar  from aplicar a 
+		$str_query = "SELECT count(r.url_comple) as total, a.idusuario,  CONCAT_WS(' ',u.nombre,u.paterno, u.materno) as usuario, s.username, GROUP_CONCAT(r.url_comple) as archivos, a.fcreacion, u.idsubsecretaria, GROUP_CONCAT(a.idaplicar) AS idaplicar  from aplicar a
 		Left join usuario u on u.idusuario = a.idusuario
 		inner join seguridad s on s.idusuario = a.idusuario
 		inner join respuesta r on r.idaplicar = a.idaplicar
@@ -27,12 +27,14 @@ class Administrador_model extends CI_Model
 	}
 
 	public function getUsuarios($idsub){
-		$str_query = "SELECT s.username, CONCAT(u.nombre, ' ' ,u.paterno, ' ', u.materno) as Usuario, count(a.idaplicar) as total, u.idusuario FROM seguridad s
+		$str_query = "SELECT
+		s.username, CONCAT_WS(' ',u.nombre,u.paterno, u.materno) as Usuario, count(a.idaplicar) as total, u.idusuario
+		FROM seguridad s
 		INNER JOIN usuario u on u.idusuario = s.idusuario
-		LEFT JOIN aplicar a on a.idusuario = u.idusuario
+		LEFT JOIN aplicar a on a.idusuario = u.idusuario AND a.estatus = 1
 		WHERE u.idsubsecretaria = {$idsub}
-		AND s.estatus <> 2 AND a.estatus = 1
-		GROUP BY u.idusuario;";
+		AND s.estatus <> 2
+		GROUP BY u.idusuario";
 		return $this->db->query($str_query)->result_array();
 	}
 
@@ -43,18 +45,18 @@ class Administrador_model extends CI_Model
 		return $this->db->query($str_query)->result_array();
 	}
 
-	public function guardarNotas($accion, $especificacion, $justificacion, $notas, $encuestado, $encuestadoOtro, $tema, $sostenimiento, $idaplicar) {	
+	public function guardarNotas($accion, $especificacion, $justificacion, $notas, $encuestado, $encuestadoOtro, $tema, $sostenimiento, $idaplicar) {
           $data = array(
             'accionMejora' => $accion,
             'especificarMejora' => $especificacion,
             'justificarMejora' => $justificacion,
-            'notasAdicionales' => $notas, 
+            'notasAdicionales' => $notas,
             'responsableDocumento' => $encuestado,
             'otroResponsable' => $encuestadoOtro,
             'tema'=> $tema,
             'sostenimiento'=> $sostenimiento
           );
-         
+
       $where = array(
             'idaplicar' => $idaplicar
           );
@@ -70,19 +72,46 @@ class Administrador_model extends CI_Model
 
 	public function eliminar_req($idaplicar)
 	{
+		$this->db->trans_start();
+
+		$str_query_1 = " DELETE
+		FROM respuesta
+		WHERE idaplicar = ?
+		";
+		$this->db->query($str_query_1, array($idaplicar));
+
+		$str_query_2 = " DELETE
+		FROM aplicar
+		WHERE idaplicar = ?
+		";
+		$this->db->query($str_query_2, array($idaplicar));
+
+		$this->db->trans_complete();
+
+		if ($this->db->trans_status() === FALSE){
+			return FALSE;
+		}
+		else{
+			return TRUE;
+		}
+	}
+
+	public function deshabilitar_req($idaplicar)
+	{
 		 $data = array(
            'estatus'=> 0
           );
-         
+
       $where = array(
             'idaplicar' => $idaplicar
           );
       $this->db->where($where);
       return  $this->db->update('aplicar', $data);
 
-		
+
 	}
-	
+
+
 }
 
 ?>

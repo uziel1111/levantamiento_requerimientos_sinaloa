@@ -56,3 +56,4 @@ $route['translate_uri_dashes'] = FALSE;
 $route['encuestador'] = 'Encuestador/index';
 $route['encuesta/(:num)'] = 'Encuesta/mostrar/$1';
 $route['encuesta/edith/(:num)'] = 'Encuesta/editar/$1';
+$route['encuesta/crear/(:num)'] = 'Encuesta/aplicar/$1';

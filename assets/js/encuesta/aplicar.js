@@ -246,7 +246,7 @@ $("#btn_encuesta_guardar").click(function(e){
                 }else{
                   array_preguntas.push(idpregunta);
                   // console.log("else includes");
-                  if(!$("input[name="+elem.name+"]:checked").val()) {
+                  if(!$("input[name="+elem.name+"]:checked").val() && $("input[name="+elem.name+"]").data('idpregunta') != 26 ) {
                       $('#label_'+elem.name).html('seleccione <br />');
                       error++;
                   } else {
@@ -371,7 +371,6 @@ $("#btn_encuesta_guardar").click(function(e){
         // return false;
 
 
-
         Aplicar.guardar_ok(array_ids_ok);
       }
       return false;
@@ -420,7 +419,7 @@ $("#btn_encuesta_guardar").click(function(e){
         $("#wait").modal("hide");
         if (data.estatus) {
           bootbox.alert(data.respuesta, function(){
-            window.location.href = base_url+"Encuestador";
+            window.location.href = base_url;
         });
         }
         else {

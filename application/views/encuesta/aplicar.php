@@ -12,15 +12,15 @@
 
       <?php $array_idpreguntas = array();  $i = 0;?>
       <?php //echo'<pre>'; print_r($_SESSION['datos_usuario_ceeo']['idusuario']); die();  ?>
-
+        <input type="hidden" name="idusuario" id="idusuario" value ="<?=$idusuario?>">
       <?php foreach ($array_preguntas as $key => $pregunta) { array_push($array_idpreguntas, $pregunta['idpregunta'].'/'.$pregunta['idtipopregunta'] ); ?>
-        <?php if($pregunta['idtipousuario'] == $_SESSION['datos_usuario_ceeo']['idtipousuario']){ ?>
+        <?php if($pregunta['idtipousuario'] == U_ENCUESTADOR || $_SESSION['datos_usuario_ceeo']['idtipousuario'] == U_ADMINISTRADOR ){ ?>
         <div class="row margintop10">
             <div class='col-xs-12'>
         <label><?= $pregunta['npregunta'] ?>.- <?= $pregunta['pregunta'] ?></label> <?php if ($pregunta['instructivo'] != null) { ?><i class="fa fa-info-circle" data-toggle="tooltip" data-placement="top" title="<?= $pregunta['instructivo'] ?>"></i><?php } ?>
             </div>
             <?php if($pregunta['idtipopregunta'] == PREGUNTA_ABIERTA){ ?>
-              <?php if ($pregunta['npregunta']==14  || $pregunta['npregunta']==25 || $pregunta['npregunta']==23 ){ $i++;?>
+              <?php if ($pregunta['npregunta']==14  || $pregunta['npregunta']==25 || $pregunta['npregunta']==23  || $pregunta['npregunta']==27 ){ $i++;?>
                 <div class='col-xs-12'>
                 <?php if($pregunta['tamanio_campo'] > 80) {?>
                   <textarea data-idpregunta="<?= $pregunta['idpregunta'] ?>" class='form-control textarea_blur' rows='2' name="<?= $pregunta['idpregunta'] ?>" style="height: <?= ($pregunta['tamanio_campo'] == 250)?'60px':'120px'?>;"  data-tamanio ="<?= $pregunta['tamanio_campo']?>"  maxlength="<?= $pregunta['tamanio_campo']?>" id="textarea<?=$i?>"></textarea>
@@ -100,7 +100,7 @@
       <div class="row margintop10">
         <div class='col-xs-12 col-sm-12 col-md-8 col-lg-8'></div>
         <div class='col-xs-12 col-sm-12 col-md-2 col-lg-2'>
-          <a href="<?= base_url('Encuestador') ?>" class="btn btn-info btn-block">Regresar</a>
+          <a href="<?= base_url() ?>" class="btn btn-info btn-block">Regresar</a>
         </div>
         <div class='col-xs-12 col-sm-12 col-md-2 col-lg-2'>
             <button id="btn_encuesta_guardar" type='button' class='btn btn-primary btn-block'>Guardar</button>

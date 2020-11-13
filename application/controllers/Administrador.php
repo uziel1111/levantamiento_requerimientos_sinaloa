@@ -7,26 +7,40 @@ class Administrador extends CI_Controller {
     parent::__construct();
     $this->load->helper('appweb');
     $this->load->model('Administrador_model');
+    $this->load->model('Encuesta_model');
   }
 
   public function getSubsecretaria(){
     $result = $this->Administrador_model->getSubsecretaria();
+    // echo "<pre>";print_r($result);die();
     return $result;
   }
 
   public function getUsuario(){
     $id = $_POST['id'];
     $usuario = $this->Administrador_model->getUsuarios($id);
+    // echo "<pre>";print_r($usuario);die();
     foreach ($usuario as $key => $value) {
 
       echo"<div class='accordion' id='accordionExample'>
             <div class='card'>
               <div class='card-header' id='headingOne'>
                 <h5 class='mb-0'>
+                <div class='row'>
+                <div class='col-xs-6 col-sm-6 col-md-6 col-lg-6'>
                   <button  class='btn btn-link' onclick='traerArchivos(".$value['idusuario'].")' type='button' data-toggle='collapse' data-target='#collapse".$value['idusuario']."' aria-expanded='true' aria-controls='collapse".$value['idusuario']."'>
                     <p id='p".$id."'>".$value['Usuario']." Usuario: <i>  ".$value['username']."</i> Total: <b>  ".$value['total']."</b></p>
                   </button>
+                  </div>
+                  <div class='col-xs-2 col-sm-2 col-md-2 col-lg-2'>
+                    <a onclick='agregar_req(".$value['idusuario'].")' type='button' class='btn btn-primary btn-block' data-toggle='tooltip' data-placement='top' title='Agregar nuevo requerimiento'>
+                      <i class='fa fa-pencil'></i>
+                      Agregar
+                    </a>
+                  </div>
+                  </div>
                 </h5>
+
               </div>
 
               <div id='collapse".$value['idusuario']."' class='collapse' aria-labelledby='headingOne' data-parent='#accordionExample'>
@@ -50,6 +64,7 @@ class Administrador extends CI_Controller {
               <th scope='col'>Archivo</th>
               <th scope='col'>Fecha</th>
               <th scope='col'>Editar</th>
+              <th scope='col'>Deshabilitar</th>
               <th scope='col'>Eliminar</th>
               <th scope='col'>Mostrar</th>
               <th scope='col'>Evidencia</th>
@@ -61,8 +76,9 @@ class Administrador extends CI_Controller {
               <td scope='row'>".$value['idaplicar']."</td>
               <td>".$archivo."</td>
               <td>".$value['fcreacion']."</td>
-              <td> <button onclick='editar_ev(".$value['idaplicar'].")' type='button' class='btn btn-primary btn-block'> <i class='fa fa-edit'></i> Editar</button>
-              <td> <button onclick='eliminar_ev(".$value['idaplicar'].",".$iduser.")' type='button' class='btn btn-primary btn-block'> <i class='fa fa-trash'></i> Eliminar</button>
+              <td> <button onclick='editar_ev(".$value['idaplicar'].")' type='button' class='btn btn-primary btn-block'> <i class='fa fa-edit'></i> Editar</button></td>
+              <td> <button onclick='deshabilitar_ev(".$value['idaplicar'].",".$iduser.")' type='button' class='btn btn-primary btn-block'> <i class='fa fa-window-close'></i> Deshabilitar</button></td>
+              <td> <button onclick='eliminar_ev(".$value['idaplicar'].",".$iduser.")' type='button' class='btn btn-primary btn-block'> <i class='fa fa-trash'></i> Eliminar</button></td>
               <td> <button onclick='mostrar_encuesta(".$value['idaplicar'].",".$iduser.")' type='button' class='btn btn-primary btn-block'>
                       <i class='fa fa-eye'></i> Mostrar
                    </button>
@@ -99,6 +115,14 @@ class Administrador extends CI_Controller {
     envia_datos_json(200, $response, $this);
   }
 
+  public function deshabilitar_req() {
+    $idaplicar = $this->input->post('id');
+
+    $result = $this->Administrador_model->deshabilitar_req($idaplicar);
+    $response = ($result != 0) ? true : false;
+    envia_datos_json(200, $response, $this);
+  }
+
   public function index(){
     if(verifica_sesion_redirige($this)){
       $data["titulo"] = "COORDINADOR";
@@ -117,6 +141,5 @@ class Administrador extends CI_Controller {
       pagina_basica($this, "administrador/index", $data);
     }
     }// index()
-
 
   }
