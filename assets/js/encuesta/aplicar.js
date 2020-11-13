@@ -31,7 +31,7 @@ $('#ifile_aplicar').change(function() {
  var file = input.files[0];
  var fileType = file.type;
 
-   if ((fileType== 'application/pdf' || fileType== 'image/jpeg') && file.size<10000000) {
+   if ((fileType== 'application/pdf' || fileType== 'image/jpeg' || fileType== 'image/png' || fileType== 'image/jpg') && file.size<10000000) {
      pdffile_url=URL.createObjectURL(file);
 
          if (fileType.search('application/vnd')==0 ) {
