@@ -27,7 +27,7 @@ class Administrador extends CI_Controller {
               <div class='card-header' id='headingOne'>
                 <h5 class='mb-0'>
                 <div class='row'>
-                <div class='col-xs-6 col-sm-6 col-md-6 col-lg-6'>
+                <div class='col-xs-9 col-sm-9 col-md-9 col-lg-9'>
                   <button  class='btn btn-link' onclick='traerArchivos(".$value['idusuario'].")' type='button' data-toggle='collapse' data-target='#collapse".$value['idusuario']."' aria-expanded='true' aria-controls='collapse".$value['idusuario']."'>
                     <p id='p".$id."'>".$value['Usuario']." Usuario: <i>  ".$value['username']."</i> Total: <b>  ".$value['total']."</b></p>
                   </button>
