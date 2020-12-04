@@ -20,7 +20,7 @@
           if (hay_sesion_abierta($contexto)) {
               return true;
           }else{
-            redirect('login', 'refresh');
+            redirect('Login', 'refresh');
           }
       	}// verifica_sesion_redirige()
     }
