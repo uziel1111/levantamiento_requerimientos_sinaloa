@@ -356,9 +356,10 @@ $("#btn_encuesta_editar").click(function(e){
           if((array_ids_ok[i]['tipo'] == 3) || (array_ids_ok[i]['tipo'] == '3')){ // sólo checkbox
                 let string_ok = '';
                 let valor = '';
-           if( array_ids_ok[i]['idpregunta'] == '26' && !$("input[name=26]").is(":checked")){
+           if( (array_ids_ok[i]['idpregunta'] == '26' && !$("input[name=26]").is(":checked")) || (array_ids_ok[i]['idpregunta'] == '28' && !$("input[name=28]").is(":checked"))){
             valor = '';
            } else {
+             console.log(valores);
             valor = valores[0]['valor'];
            }
               string_ok = string_ok+valor+'/';

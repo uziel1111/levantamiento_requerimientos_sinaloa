@@ -246,7 +246,7 @@ $("#btn_encuesta_guardar").click(function(e){
                 }else{
                   array_preguntas.push(idpregunta);
                   // console.log("else includes");
-                  if(!$("input[name="+elem.name+"]:checked").val() && $("input[name="+elem.name+"]").data('idpregunta') != 26 ) {
+                  if(!$("input[name="+elem.name+"]:checked").val() && $("input[name="+elem.name+"]").data('idpregunta') != 26 && $("input[name="+elem.name+"]").data('idpregunta') != 28 ) {
                       $('#label_'+elem.name).html('seleccione <br />');
                       error++;
                   } else {

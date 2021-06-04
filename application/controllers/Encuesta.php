@@ -116,7 +116,7 @@ class Encuesta extends CI_Controller {
   public function guardar(){
      // echo "<pre>";print_r($_POST['idusuario']);die();
      // $nombre_archivo = str_replace(" ", "_", $_FILES['ifile_aplicar']['name']);
-     echo "<pre>";print_r($_FILES);die();
+     // echo "<pre>";print_r($_FILES);die();
      if(verifica_sesion_redirige($this)){
       $band = TRUE;
       $estatus_arch = TRUE;
