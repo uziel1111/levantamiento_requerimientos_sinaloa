@@ -31,7 +31,7 @@ class Administrador_model extends CI_Model
 		s.username, CONCAT_WS(' ',u.nombre,u.paterno, u.materno) as Usuario, count(a.idaplicar) as total, u.idusuario
 		FROM seguridad s
 		INNER JOIN usuario u on u.idusuario = s.idusuario
-		LEFT JOIN aplicar a on a.idusuario = u.idusuario AND a.estatus = 1
+		LEFT JOIN aplicar a on a.idusuario = u.idusuario AND (a.estatus = 1 or a.estatus = 0)
 		WHERE u.idsubsecretaria = {$idsub}
 		AND s.estatus <> 2
 		GROUP BY u.idusuario";
@@ -39,9 +39,9 @@ class Administrador_model extends CI_Model
 	}
 
 	public function getArchivos($iduser){
-		$str_query = "SELECT r.idaplicar, r.url_comple as archivo, a.fcreacion FROM respuesta r
+		$str_query = "SELECT r.idaplicar, r.url_comple as archivo, a.fcreacion, a.estatus FROM respuesta r
 		INNER JOIN aplicar a on a.idaplicar = r.idaplicar
-		where a.idusuario = {$iduser} and url_comple IS NOT NULL AND a.estatus = 1;";
+		where a.idusuario = {$iduser} and url_comple IS NOT NULL AND ( a.estatus = 1 or a.estatus = 0);";
 		return $this->db->query($str_query)->result_array();
 	}
 
@@ -100,6 +100,21 @@ class Administrador_model extends CI_Model
 	{
 		 $data = array(
            'estatus'=> 0
+          );
+
+      $where = array(
+            'idaplicar' => $idaplicar
+          );
+      $this->db->where($where);
+      return  $this->db->update('aplicar', $data);
+
+
+	}
+
+	public function habilitar_req($idaplicar)
+	{
+		 $data = array(
+           'estatus'=> 1
           );
 
       $where = array(

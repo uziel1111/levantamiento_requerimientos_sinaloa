@@ -96,6 +96,35 @@
    });
   }
 
+	function habilitar_ev(idaplicar,iduser) {
+  	ruta = base_url+'Administrador/habilitar_req';
+  	$.ajax({
+  		url: ruta,
+  		type: 'POST',
+  		dataType: 'json',
+  		data: {id: idaplicar},
+  		 beforeSend: function( xhr ) {
+       $("#wait").modal("show");
+     }
+  	})
+  	.done(function(data) {
+  		if (data) {
+  		alert('El requerimiento se habilito exitosamente');
+  		traerArchivos(iduser);
+			location.reload();
+  		// console.log($('#p' + iduser).text());
+  		}else{
+  		alert('Error al habilitado');
+  		}
+
+  		 $("#wait").modal("hide");
+  	})
+  	 .fail(function(jqXHR, textStatus, errorThrown) {
+     console.error("Error in read()"); console.table(e);
+     $("#wait").modal("hide"); Helpers.error_ajax(jqXHR, textStatus, errorThrown);
+   });
+  }
+
   function editar_ev(idaplicar) {
   	 let form = document.createElement("form");
 

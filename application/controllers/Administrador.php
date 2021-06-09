@@ -64,7 +64,7 @@ class Administrador extends CI_Controller {
               <th scope='col'>Archivo</th>
               <th scope='col'>Fecha</th>
               <th scope='col'>Editar</th>
-              <th scope='col'>Deshabilitar</th>
+              <th scope='col'>Opción</th>
               <th scope='col'>Eliminar</th>
               <th scope='col'>Mostrar</th>
               <th scope='col'>Evidencia</th>
@@ -76,9 +76,14 @@ class Administrador extends CI_Controller {
               <td scope='row'>".$value['idaplicar']."</td>
               <td>".$archivo."</td>
               <td>".$value['fcreacion']."</td>
-              <td> <button onclick='editar_ev(".$value['idaplicar'].")' type='button' class='btn btn-primary btn-block'> <i class='fa fa-edit'></i> Editar</button></td>
-              <td> <button onclick='deshabilitar_ev(".$value['idaplicar'].",".$iduser.")' type='button' class='btn btn-primary btn-block'> <i class='fa fa-window-close'></i> Deshabilitar</button></td>
-              <td> <button onclick='eliminar_ev(".$value['idaplicar'].",".$iduser.")' type='button' class='btn btn-primary btn-block'> <i class='fa fa-trash'></i> Eliminar</button></td>
+              <td> <button onclick='editar_ev(".$value['idaplicar'].")' type='button' class='btn btn-primary btn-block'> <i class='fa fa-edit'></i> Editar</button></td>";
+      if ($value['estatus']==1) {
+        echo    "<td> <button onclick='deshabilitar_ev(".$value['idaplicar'].",".$iduser.")' type='button' class='btn btn-primary btn-block'> <i class='fa fa-window-close'></i> Deshabilitar</button></td>";
+      }
+      else {
+        echo    "<td> <button onclick='habilitar_ev(".$value['idaplicar'].",".$iduser.")' type='button' class='btn btn-primary btn-block'> <i class='fa fa-check'></i> Habilitar</button></td>";
+      }
+      echo    "<td> <button onclick='eliminar_ev(".$value['idaplicar'].",".$iduser.")' type='button' class='btn btn-primary btn-block'> <i class='fa fa-trash'></i> Eliminar</button></td>
               <td> <button onclick='mostrar_encuesta(".$value['idaplicar'].",".$iduser.")' type='button' class='btn btn-primary btn-block'>
                       <i class='fa fa-eye'></i> Mostrar
                    </button>
@@ -119,6 +124,14 @@ class Administrador extends CI_Controller {
     $idaplicar = $this->input->post('id');
 
     $result = $this->Administrador_model->deshabilitar_req($idaplicar);
+    $response = ($result != 0) ? true : false;
+    envia_datos_json(200, $response, $this);
+  }
+
+  public function habilitar_req() {
+    $idaplicar = $this->input->post('id');
+
+    $result = $this->Administrador_model->habilitar_req($idaplicar);
     $response = ($result != 0) ? true : false;
     envia_datos_json(200, $response, $this);
   }
