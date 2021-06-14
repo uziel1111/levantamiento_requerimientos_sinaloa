@@ -53,7 +53,7 @@
                   <input type="hidden" id="itxt_aplicar_idpregunta_<?= $pregunta['idpregunta'] ?>" name="itxt_aplicar_idpregunta_<?= $pregunta['idpregunta'] ?>" value="">
                 <?php } ?>
                       <label class='checkbox-inline'>
-                        <input class='requerido checkbox_change' type='checkbox' data-idpregunta="<?= $pregunta['idpregunta'] ?>" name="<?= $pregunta['idpregunta'] ?>" value='<?= $complemento['complemento'] ?>'
+                        <input class='<?=($pregunta['npregunta']==29)?'':'requerido'?> checkbox_change' type='checkbox' data-idpregunta="<?= $pregunta['idpregunta'] ?>" name="<?= $pregunta['idpregunta'] ?>" value='<?= $complemento['complemento'] ?>'
                         <?php foreach ($array_respuetas as $keyr => $valuer): ?>
                           <?php if ($valuer['idpregunta']==$pregunta['idpregunta'] ){ ?>
                             <?php if ($valuer['complemento']==$complemento['complemento']){ ?>
@@ -63,7 +63,8 @@
                                <?php }
                              }?>
                         <?php endforeach; ?>
-                        > <?= $complemento['complemento'] ?>
+                        >
+                        <?= $complemento['complemento'] ?>
                       </label>
                       <label id="label_<?= $pregunta['idpregunta'] ?>" class="error"></label>
                 </div>
